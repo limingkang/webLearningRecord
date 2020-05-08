@@ -1,0 +1,14 @@
+{
+  "name": "webLearningRecord",
+  "version": "1.0.0",
+  "description": "web learning",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "deploy": "bash deploy.sh"
+  },
+  "keywords": [],
+  "author": "limingkang",
+  "license": "ISC"
+}
