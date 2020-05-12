@@ -1,10 +1,19 @@
 module.exports = [
   {
-    title: 'vue3源码',
+    title: '浏览器工作原理和实践',
     path: '/',
     collapsable: false,
     children: [
-      ['/techAccumulate/vue-rfc', 'vue3和2响应式对比']
+      ['/browser-theory/chromeConstruct', 'chrome架构']
+    ]
+  },
+  {
+    title: '微前端架构',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/web-consttruct/singleSpa', 'single-spa方式实现'],
+      ['/web-consttruct/mySingleSpa', '自己实现一个微前端']
     ]
   },
 ]
