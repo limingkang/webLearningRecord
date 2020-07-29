@@ -661,3 +661,4 @@ console.log('test')
 3. 后面的流水线就和前面是一样的了，不管 CSS 文件和 JavaScript 文件谁先到达，都要先等 到 CSS 文件下载完成并生成
 CSSOM，然后再执行 JavaScript 脚本，最后再继续构建 DOM，构建布局树，绘制页面
 
+
