@@ -16,4 +16,14 @@ module.exports = [
       ['/web-consttruct/mySingleSpa', '自己实现一个微前端']
     ]
   },
+  {
+    title: 'vue2源码分析',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/vue-analyze/vue2', '初始化过程'],
+      ['/vue-analyze/components', '组件化'],
+      ['/vue-analyze/reactive', '响应式原理']
+    ]
+  },
 ]
