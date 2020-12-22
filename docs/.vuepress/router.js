@@ -17,6 +17,14 @@ module.exports = [
     ]
   },
   {
+    title: '前端性能监控',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/web-observe/web-observe', '构建前端性能监控']
+    ]
+  },
+  {
     title: 'vue2源码分析',
     path: '/',
     collapsable: false,
@@ -24,6 +32,34 @@ module.exports = [
       ['/vue-analyze/vue2', '初始化过程'],
       ['/vue-analyze/components', '组件化'],
       ['/vue-analyze/reactive', '响应式原理']
+    ]
+  },
+  {
+    title: 'react浅析',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/react/react', 'react初探'],
+      ['/react/two', 'react架构实现'],
+    ]
+  },
+  {
+    title: '经常忘记',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/forget/one', 'JavaScript'],
+      ['/forget/two', 'TypeScript'],
+      ['/forget/three', 'CSS'],
+    ]
+  },
+  {
+    title: '笔试题',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/algorithm/one', '算法'],
+      ['/algorithm/two', '手写函数']
     ]
   },
 ]
