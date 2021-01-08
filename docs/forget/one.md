@@ -14,6 +14,51 @@ true==!![]   //true
 alert(typeof NaN);   //弹出 'Number'
 alert(NaN === NaN);  //为 false
 ```
+可以出个简单的题目,下面代码中 a 在什么情况下会打印 1
+``` js
+var a = ?;
+if(a == 1 && a == 2 && a == 3){
+ 	conso.log(1);
+}
+```
+因为==会进行隐式类型转换会调用本类型toString或valueOf方法,重写他们即可
+``` js
+let a = {
+  i: 1,
+  toString () {
+    return a.i++
+  }
+}
+if(a == 1 && a == 2 && a == 3) {
+  console.log('1');
+}
+
+
+let a = {
+  i: 1,
+  valueOf () {
+    return a.i++
+  }
+}
+if(a == 1 && a == 2 && a == 3) {
+  console.log('1');
+}
+
+var a = [1,2,3];
+a.join = a.shift;
+if(a == 1 && a == 2 && a == 3) {
+  console.log('1');
+}
+
+var str1 = String('11')
+var str2 = new String('11')
+str1 == str2 // true
+str1 === str2 // false
+typeof str1  // "string"
+typeof str2 // "object"
+// ==时做了隐式转换，调用了toString
+// 2者类型不一样，一个是string，一个是object
+```
 
 ## 正则表达式功能
 
@@ -128,6 +173,22 @@ console.log(ret2[0]);          // "1a2"
     return group1+group3;
 })
 ```
+还有一些其他小注意点
+``` js
+'a1b2c3d1'.search('1') //output:1
+//search方法用于查找返回匹配到的字符串的开始位置没找到就返回-1,这个方法忽略/g标志
+//实际上对于字符串的像split,replace等方法最终都是隐式转换为正则表达式的
+'a,b,c,d'.split(',') ===> 'a,b,c,d'.split(/,/g)输出['a','b','c','d']
+'a1b2c3d4'.split(/\d/g) ===> ['a','b','c','d']
+
+// 任意字符12345678 通过正则转换成 12,345,678
+n.toString().replace(/\B(?=(\d{3})+$)/g, ",");
+
+var RegExp = /^(123)(456)\2\1$/; // 匹配 123456456123
+var RegExp1 = /^(123)(456)\1$/; // 匹配 123456123
+var RegExp1 = /^(123)(456)\2$/; // 匹配 123456456
+```
+[正则表达式库](https://github.com/any86/any-rule)
 
 ## 杂物
 undefined 在 ES5 中已经是全局对象的一个只读（read - only）属性了，它不能被重写。但是在局部作用域中，还是可以被重写的；
@@ -135,7 +196,8 @@ void 运算符能对给定的表达式进行求值，然后返回 undefined。�
 如 void (2), void (‘hello’) 。并且void是不能被重写的。但为什么是void 0 呢，void 0 是表达式中最短的。用 void 0 代
 替 undefined 能节省字节。不少 JavaScript压缩工具在压缩过程中，正是将 undefined 用 void 0 代替掉了
 
-
+[各种框架中文文档](https://docschina.org/)
+[众多工具集合，包括时间戳转换，进制转换等](https://tool.lu/)
 
 
 
