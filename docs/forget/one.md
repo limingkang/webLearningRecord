@@ -59,6 +59,8 @@ typeof str2 // "object"
 // ==时做了隐式转换，调用了toString
 // 2者类型不一样，一个是string，一个是object
 ```
+注意如果是转换为数字则优先使用valueOf，没有定义则使用toString方法，如果是转换为字符串则优先使用toString方法，没有定义
+则使用valueOf方法
 
 ## 正则表达式功能
 
@@ -189,6 +191,123 @@ var RegExp1 = /^(123)(456)\1$/; // 匹配 123456123
 var RegExp1 = /^(123)(456)\2$/; // 匹配 123456456
 ```
 [正则表达式库](https://github.com/any86/any-rule)
+
+## 类型判断toString、instanceof、typeof
+#### toString
+每一个继承 Object 的对象都有toString方法，如果 toString 方法没有重写的话，会返回 [Object type]，其中 type 为
+对象的类型。但当除了 Object 类型的对象外，其他类型直接使用 toString 方法时，会直接返回都是内容的字符串，所以我们需要
+使用call或者apply方法来改变toString方法的执行上下文
+``` js
+const an = ['Hello','An'];
+an.toString(); // "Hello,An"
+Object.prototype.toString.call(an); // "[object Array]"
+Object.prototype.toString.call('An') // "[object String]"
+Object.prototype.toString.call(1) // "[object Number]"
+Object.prototype.toString.call(Symbol(1)) // "[object Symbol]"
+Object.prototype.toString.call(null) // "[object Null]"
+Object.prototype.toString.call(undefined) // "[object Undefined]"
+Object.prototype.toString.call(function(){}) // "[object Function]"
+Object.prototype.toString.call({name: 'An'}) // "[object Object]"
+```
+
+#### typeof
+主要用于检测基本数据类型，返回值为6个字符串，分别为string、Boolean、number、function、object、undefined,但
+是在判断null、array、object以及函数实例（new + 函数）时，得到的都是object。这使得在判断这些数据类型的时候，得不到真
+是的数据类型。由此引出instanceof
+
+#### instanceof
+instanceof 的内部机制是通过判断对象的原型链中是不是能找到类型的 prototype
+``` js
+function Foo(){}
+function Bar(){}
+Bar.prototype = new Foo()
+let obj = new Bar()
+obj instanceof Bar //true
+obj instanceof Foo //true
+// 注意当在比较的时候如果左操作数不是对象，则返回false
+new String('foo') instanceof String; // true
+new String('foo') instanceof Object; // true
+'foo' instanceof String; // false
+'foo' instanceof Object; // false
+
+// 实现方法(有漏洞)
+function _instanceof(L, R) { //L为instanceof左表达式，R为右表达式
+  let Ro = R.prototype //原型
+  L = L.__proto__ //隐式原型
+  while (true) {
+    if (L === null) { //当到达L原型链顶端还未匹配，返回false
+      return false
+    }
+    if (L === Ro) { //全等时，返回true
+      return true
+    }
+    L = L.__proto__
+  }
+}
+```
+
+## js和css加载阻塞
+首先我们来了解下资源的加载方式有哪些
+### prefetch、preload
+preload 顾名思义就是一种预加载的方式，它通过声明向浏览器声明一个需要提交加载的资源，当资源真正被使用的时候立即执行，就
+无需等待网络的消耗,它可以通过 Link 标签进行创建：
+``` js
+// 使用 link 标签静态标记需要预加载的资源
+<link rel="preload" href="/path/to/style.css" as="style">
+
+// 或使用脚本动态创建一个 link 标签后插入到 head 头部
+<script>
+const link = document.createElement('link');
+link.rel = 'preload';
+link.as = 'style';
+link.href = '/path/to/style.css';
+document.head.appendChild(link);
+</script>
+```
+当浏览器解析到这行代码就会去加载 href 中对应的资源但不执行，待到真正使用到的时候再执行，另一种方式方式就是在 HTTP 响应头
+中加上 preload 字段，兼容性看IE 和 Firefox 都是不支持的，兼容性覆盖面达到 73%
+
+prefetch 跟 preload 不同，它的作用是告诉浏览器未来可能会使用到的某个资源，浏览器就会在闲时去加载对应的资源，若能预测
+到用户的行为，比如懒加载，点击到其它页面等则相当于提前预加载了需要的资源。它的用法跟 preload 是一样的，prefetch 比 
+preload 的兼容性更好，覆盖面可以达到将近 80%
+
+当一个资源被 preload 或者 prefetch 获取后，它将被放在内存缓存中等待被使用，如果资源位存在有效的缓存极致（如 
+cache-control 或 max-age），它将被存储在 HTTP 缓存中可以被不同页面所使用。正确使用 preload/prefetch 不会造
+成二次下载，也就说：当页面上使用到这个资源时候 preload 资源还没下载完，这时候不会造成二次下载，会等待第一次下载并执
+行脚本。对于 preload 来说，一旦页面关闭了，它就会立即停止 preload 获取资源，而对于 prefetch 资源，即使页面关
+闭，prefetch 发起的请求仍会进行不会中断
+
+### acync、defer
+默认情况下，脚本的下载和执行将会按照文档的先后顺序同步进行。当脚本下载和执行的时候，文档解析就会被阻塞，在脚本下载和
+执行完成之后文档才能往下继续进行解析,下面是async和defer两者区别：
+- 当script中有defer属性时，脚本的加载过程和文档加载是异步发生的，等到文档解析完(DOMContentLoaded事件发生)脚本才开始执行。
+
+- 当script有async属性时，脚本的加载过程和文档加载也是异步发生的。但脚本下载完成后会停止HTML解析，执行脚本，脚本解析完继续HTML解析。
+
+- 当script同时有async和defer属性时，执行效果和async一致
+
+对比加载方式：
+1. 它相比于 preload 加载的优势在于浏览器兼容性好，从 caniuse 上看基本上所有浏览器都支持，覆盖率达到 93%，
+2. 不足之处在于：defer 只作用于脚本文件，对于样式、图片等资源就无能为力了，并且 defer 加载的资源是要执行的，而 preload 只下载资源并不执行，待真正使用到才会执行文件。
+3. 对于页面上主/首屏脚本，可以直接使用 defer 加载，而对于非首屏脚本/其它资源，可以采用 preload/prefeth 来进行加载
+
+### js阻塞原理
+浏览器内核可以分成两部分：渲染引擎（Layout Engine 或者 Rendering Engine）和 JS 引擎。早期渲染引擎和 JS 引擎并没有
+十分明确的区分，但随着 JS 引擎越来越独立，内核也成了渲染引擎的代称（下文我们将沿用这种叫法）。渲染引擎又包括了 HTML 解释
+器、CSS 解释器、布局、网络、存储、图形、音视频、图片解码器等等零部件。
+
+JS 引擎是独立于渲染引擎存在的。我们的 JS 代码在文档的何处插入，就在何处执行。当 HTML 解析器遇到一个 script 标签时，它
+会暂停渲染过程，将控制权交给 JS 引擎。JS 引擎对内联的 JS 代码会直接执行，对外部 JS 文件还要先获取到脚本、再进行执行。
+等 JS 引擎运行完毕，浏览器又会把控制权还给渲染引擎，继续 CSSOM 和 DOM 的构建。 因此与其说是 JS 把 CSS 和 HTML 阻
+塞了，不如说是 JS 引擎抢走了渲染引擎的控制权。
+
+当CSS后面跟着嵌入的JS的时候，该CSS就会出现阻塞后面资源下载的情况。而当把嵌入JS放到CSS前面，就不会出现css阻塞图片等
+的情况了。 根本原因：因为浏览器会维持html中css和js的顺序，即在JS前面出现的CSS文件需要加载、解析完后才会执行后面的
+内嵌JS，而内嵌JS又会阻塞后面的内容
+
+外部样式会阻塞后面内联脚本的执行；外部样式不会阻塞外部脚本的加载，但会阻塞外部脚本的执行；对于具有async属性的脚本，外部css不会阻塞
+
+
 
 ## 杂物
 undefined 在 ES5 中已经是全局对象的一个只读（read - only）属性了，它不能被重写。但是在局部作用域中，还是可以被重写的；

@@ -39,6 +39,39 @@ function myNew() {
 }
 ```
 
+## const实现原理
+``` js
+var __const = function __const (data, value) {
+  window.data = value // 把要定义的data挂载到window下，并赋值value
+  // 利用Object.defineProperty的能力劫持当前对象，并修改其属性描述符
+  Object.defineProperty(window, data, {
+    enumerable: false,
+    configurable: false,
+    get: function () {
+      return value
+    },
+    set: function (data) {
+      if (data !== value) { // 当要对当前属性进行赋值时，则抛出错误！
+        throw new TypeError('Assignment to constant variable.')
+      } else {
+        return value
+      }
+    }
+  })
+}
+__const('a', 10)
+console.log(a)
+delete a
+console.log(a)
+// 因为const定义的属性在global下也是不存在的，所以用到了enumerable: false来模拟这一功能
+for (let item in window) {
+  if (item === 'a') { // 因为不可枚举，所以不执行
+    console.log(window[item])
+  }
+}
+a = 20 // 报错
+```
+
 ## bind函数实现
 ``` js
 Function.prototype.selfBind = function(that, ...arg) {
@@ -86,6 +119,12 @@ Function.prototype.selfApply = function(that, args) {
 ```
 
 ## deepCopy
+JSON.parse(JSON.stringify(obj))我们一般用来深拷贝的问题
+- 如果obj里面有时间对象，则JSON.stringify后再JSON.parse的结果，时间将只是字符串的形式。而不是时间对象
+- 如果obj里有RegExp、Error对象，则序列化的结果将只得到空对象
+- 如果obj里有函数，undefined，则序列化的结果会把函数或 undefined丢失
+- 如果obj里有NaN、Infinity和-Infinity，则序列化的结果会变成null
+- JSON.stringify()只能序列化对象的可枚举的自有属性，例如 如果obj中的对象是有构造函数生成的， 则使用JSON.parse(JSON.stringify(obj))深拷贝后，会丢弃对象的constructor
 ``` js
 function deepCopy(obj, cache = new WeakMap) {
   if (!obj instanceof Object) return obj
@@ -163,7 +202,7 @@ class EventEmitter {
 }
 ```
 
-## 函数柯里化
+## 函数柯里化与反柯里化
 ``` js
 function curry(func) {
   return function curried(...args) {
@@ -186,6 +225,24 @@ const curriedSum = curry(sum)
 console.log(curriedSum(1, 2, 3))
 console.log(curriedSum(1)(2,3))
 console.log(curriedSum(1)(2)(3))
+```
+反柯里化,使得this指针泛化
+``` js
+Function.prototype.unCurrying = function () {
+  var f = this;
+  return function () {
+    var a = arguments;
+    return f.apply(a[0], [].slice.call(a, 1));
+  };
+};
+var push = Array.prototype.push.unCurrying(),
+obj = {};
+push(obj, 'first', 'two');
+console.log(obj);            /*obj {0 : "first",1 : "two"}*/
+(function(){
+  push(arguments,4);
+  console.log(arguments)     //[1,2,3,4]
+})(1,2,3)
 ```
 
 ## es5实现继承
@@ -507,9 +564,47 @@ function upload() {
 }
 ```
 
-
-
-
+## 模拟实现koa中间件
+``` js
+// 注意其中的compose函数，这个函数是实现中间件洋葱模型的关键
+// 场景模拟
+// 异步 promise 模拟
+const delay = async () => {
+ return new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve();
+  }, 2000);
+ });
+}
+// 中间间模拟
+const fn1 = async (ctx, next) => {
+ console.log(1);
+ await next();
+ console.log(2);
+}
+const fn2 = async (ctx, next) => {
+ console.log(3);
+ await delay();
+ await next();
+ console.log(4);
+}
+const fn3 = async (ctx, next) => {
+ console.log(5);
+}
+const middlewares = [fn1, fn2, fn3];
+// compose 实现洋葱模型
+const compose = (middlewares, ctx) => {
+ const dispatch = (i) => {
+ let fn = middlewares[i];
+ if(!fn){ return Promise.resolve() }
+  return Promise.resolve(fn(ctx, () => {
+    return dispatch(i+1);
+  }));
+ }
+ return dispatch(0);
+}
+compose(middlewares, 1);
+```
 
 
 

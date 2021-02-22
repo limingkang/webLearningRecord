@@ -4,7 +4,8 @@ module.exports = [
     path: '/',
     collapsable: false,
     children: [
-      ['/browser-theory/chromeConstruct', 'chrome架构']
+      ['/browser-theory/chromeConstruct', 'chrome架构'],
+      ['/browser-theory/other', '缓存和安全']
     ]
   },
   {
@@ -51,6 +52,7 @@ module.exports = [
       ['/forget/one', 'JavaScript'],
       ['/forget/two', 'TypeScript'],
       ['/forget/three', 'CSS'],
+      ['/forget/four', 'Node'],
     ]
   },
   {

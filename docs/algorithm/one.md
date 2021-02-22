@@ -445,11 +445,100 @@ var findSubstring = function(s, words) {
 };
 ```
 
+## 排序数组中找元素第一和最后一个位置
+直观的思路肯定是从前往后遍历一遍。用两个变量记录第一次和最后一次遇见 \textit{target}target 的下标，但这个方法的时间
+复杂度为 O(n)，没有利用到数组升序排列的条件。由于数组已经排序，因此整个数组是单调递增的，我们可以利用二分法来加速查找的
+过程。考虑target开始和结束位置，其实我们要找的就是数组中「第一个等于target 的位置」（记为leftIdx）和「第一个大于target
+的位置减一1」（记为rightIdx）
+
+二分查找中，两者的判断条件不同，为了代码的复用，我们定义binarySearch(nums, target, lower) 表示在nums 数组中二分查
+找target 的位置，如果lower为true，则查找第一个大于等于target 的下标，否则查找第一个大于target 的下标
+
+最后，因为target 可能不存在数组中，因此我们需要重新校验我们得到的两个下标leftIdx和rightIdx，看是否符合条件，如果符合
+条件就返回`[leftIdx,rightIdx]`，不符合就返回`[−1,−1]`
+``` js
+const binarySearch = (nums, target, lower) => {
+  let left = 0, right = nums.length - 1, ans = nums.length;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    if (nums[mid] > target || (lower && nums[mid] >= target)) {
+      right = mid - 1;
+      ans = mid;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return ans;
+}
+var searchRange = function(nums, target) {
+  let ans = [-1, -1];
+  const leftIdx = binarySearch(nums, target, true);
+  const rightIdx = binarySearch(nums, target, false) - 1;
+  if (leftIdx <= rightIdx && rightIdx < nums.length && nums[leftIdx] === target && nums[rightIdx] === target) {
+    ans = [leftIdx, rightIdx];
+  } 
+  return ans;
+};
+```
+
+## 广度优先深度优先遍历
+对于算法来说 无非就是时间换空间 空间换时间
+- 深度优先不需要记住所有的节点, 所以占用空间小, 而广度优先需要先记录所有的节点占用空间大
+- 深度优先有回溯的操作(没有路走了需要回头)所以相对而言时间会长一点
+- 深度优先采用的是堆栈的形式, 即先进后出
+- 广度优先则采用的是队列的形式, 即先进先出
+``` js
+const data = [
+    {
+        name: 'a',
+        children: [
+            { name: 'b', children: [{ name: 'e' }] },
+            { name: 'c', children: [{ name: 'f' }] },
+            { name: 'd', children: [{ name: 'g' }] },
+        ],
+    },
+    {
+        name: 'a2',
+        children: [
+            { name: 'b2', children: [{ name: 'e2' }] },
+            { name: 'c2', children: [{ name: 'f2' }] },
+            { name: 'd2', children: [{ name: 'g2' }] },
+        ],
+    }
+]
+// 深度遍历, 使用递归
+function getName(data) {
+    const result = [];
+    data.forEach(item => {
+        const map = data => {
+            result.push(data.name);
+            data.children && data.children.forEach(child => map(child));
+        }
+        map(item);
+    })
+    return result.join(',');
+}
+// 广度遍历, 创建一个执行队列, 当队列为空的时候则结束
+function getName2(data) {
+    let result = [];
+    let queue = data;
+    while (queue.length > 0) {
+        [...queue].forEach(child => {
+            queue.shift();
+            result.push(child.name);
+            child.children && (queue.push(...child.children));
+        });
+    }
+    return result.join(',');
+}
+console.log(getName(data))
+console.log(getName2(data))
+//a,b,e,c,f,d,g,a2,b2,e2,c2,f2,d2,g2
+// a,a2,b,c,d,b2,c2,d2,e,f,g,e2,f2,g2 
+```
 
 
-
-
-
+[leetcode](https://leetcode-cn.com/problemset/all/);
 
 
 
