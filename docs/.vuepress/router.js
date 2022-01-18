@@ -53,6 +53,7 @@ module.exports = [
       ['/forget/two', 'TypeScript'],
       ['/forget/three', 'CSS'],
       ['/forget/four', 'Node'],
+      ['/forget/five', '经常使用'],
     ]
   },
   {
