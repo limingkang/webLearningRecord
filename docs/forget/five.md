@@ -87,12 +87,20 @@ docker ps|grep $name
 # 停用某个服务
 docker kill $imageId
 # 删除本地docker镜像
-docker rm $imageId
+docker rmi -f $imageId
 # 查看docker中的变量
 docker inspect $imageId
+# 删除本地所有docker镜像
+docker rmi `docker images -q` -f
+# 删除某个容器
+docker rm -f containerid
+# 删除所有容器
+docker rm -f `docker ps -a -q`
 # 进入docker内部查看nginx配置
 docker exec -it $imageId bash
 docker exec -it $imageId sh
+# 查看某个镜像的日志
+docker logs -f  --tail=100 imageid
 ```		
 		
 ### docker-compose
@@ -199,22 +207,57 @@ GPU_ID:${gpu_id}
 
 
 
-## 密钥生成
-本机执行：ssh-keygen -t rsa
-遇到提示，直接回车就OK，秘钥生成在用户的根目录的.ssh目录下。比如小白用户的/home/xiaobai/.ssh目录下
-复制/home/xiaobai/.ssh/id_rsa.pub文件到目标服务器的/home/login_user/.ssh目录下，并重命名为authorized_keys
-如果目标服务器上存在authorized_keys文件，请将id_rsa.pub文件内容追加到authorized_keys,如果不存在.ssh，执行：ssh-keygen -t rsa 生成
+## 快速装机必备
+
+### 首先安装我们需要的包,前端就是node git vscode
+[node 安装地址](http://nodejs.cn/download/)
+
+[git安装或者直接使用npm安装](https://www.git-scm.com/download/mac)
+ 
+
+下载vscode之后直接装好对应插件
+1. ESlint
+2. Git history
+3. GitLens `查看git提交记录`
+4. Vetur `vue 语法高亮、错误提示、自动格式化等的插件`
+
+特别的时候是，如果自动保存格式化失效的话，可以从新设置下，在preferences -> settings 找到extensions里面的eslint的配置，可以进去编辑json文件,给个下面的例子，
+但是不通版本可能配置不太一样
+``` json
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "html",
+        "vue"
+    ],
+    "workbench.editor.enablePreview": false,
+    "files.autoSave": "onFocusChange",
+    "explorer.confirmDelete": false,
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "eslint.codeAction.showDocumentation": {
+        "enable": true
+    },
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "vscodeGoogleTranslate.preferredLanguage": "English",
+}
+```
+
+接下来我们需要配置git的免密码登陆
+1. 本机执行：ssh-keygen -t rsa
+2. 遇到提示，直接回车就OK，秘钥生成在用户的根目录的.ssh目录下。比如小白用户的/home/xiaobai/.ssh目录下
+3. 复制/home/xiaobai/.ssh/id_rsa.pub文件到目标服务器的/home/login_user/.ssh目录下，并重命名为authorized_keys
+4. 如果目标服务器上存在authorized_keys文件，请将id_rsa.pub文件内容追加到authorized_keys,如果不存在.ssh，执行：ssh-keygen -t rsa 生成
 
 
-vscode插件
-ESlint
-Git history
-GitLens
-Vetur
+接下来终端oh-my-zsh安装，提供两个命令:
 
-node git vscode
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+`sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
+
+`sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"`
 
 
 

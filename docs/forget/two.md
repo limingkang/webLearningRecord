@@ -362,6 +362,12 @@ type Func = (user: User) => void
 type Param = ParamType<Func>;   // Param = User
 type AA = ParamType<string>;    // string
 ```
+上次我写了20多行，就为了获取一堆各种不同类型的数组里的元素类型，然而如果使用infer，会变得十分简单
+``` ts
+type Elemenof<T> = T extends Array<infer E> ? E : T;
+type Tuple = string[];
+type TupleToUnion = Elemenof<Tuple>
+```
 
 ## Partial、Pick
 ``` ts

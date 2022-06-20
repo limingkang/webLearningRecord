@@ -36,6 +36,23 @@ module.exports = [
     ]
   },
   {
+    title: 'rollup',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/rollup/analysize', 'basic']
+    ]
+  },
+  {
+    title: 'vite',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/vite/prelearn', '基础知识'],
+      ['/vite/analysize', '源码分析']
+    ]
+  },
+  {
     title: 'react浅析',
     path: '/',
     collapsable: false,
