@@ -333,6 +333,100 @@ var exported = load(module.exports, module);
 也就是说，默认情况下，Node准备的exports变量和module.exports变量实际上是同一个变量，并且初始化为空对象{}，
 `module.exports = function () { return 'foo'; };`给exports赋值是无效的，因为赋值后，module.exports仍然是空对象{}。
 
+## 循环引入
+如果被问到“CommonJS和ES Module的差异”，大概每个前端都都背出几条：一个是导出值的拷贝，一个是导出值的引用；一个是运行时加载，一个是静态编译....
+
+``` js
+//index.js
+var a = require('./a')
+console.log('入口模块引用a模块：',a)
+
+// a.js
+exports.a = '原始值-a模块内变量'
+var b = require('./b')
+console.log('a模块引用b模块：',b)
+exports.a = '修改值-a模块内变量'
+
+// b.js
+exports.b ='原始值-b模块内变量'
+var a = require('./a')
+console.log('b模块引用a模块',a)
+exports.b = '修改值-b模块内变量'
+
+// 输出结果
+// b模块引用a模块 { a: '原始值-a模块内变量' }
+// b模块引用a模块 { b: '修改值-b模块内变量' }
+// 入口模块引用a模块：{ a: '修改值-a模块内变量' }
+```
+循环引用无非是要解决两个问题，怎么避免死循环以及输出的值是什么。CommonJS通过模块缓存来解决：每一个模块都先加入缓存再执行，每次遇到require都先检查
+缓存，这样就不会出现死循环；借助缓存，输出的值也很简单就能找到了
+![An image](./images/1.png)
+
+### 多次引入
+同样由于缓存，一个模块不会被多次执行，来看下面这个例子：入口模块引用了a、b两个模块，a、b这两个模块又分别引用了c模块，此时并不存在循环引用，但
+是c模块被引用了两次
+``` js
+//index.js
+var a = require('./a')
+var b= require('./b')
+
+// a.js
+module.exports.a = '原始值-a模块内变量'
+console.log('a模块执行')
+var c = require('./c')
+
+// b.js
+module.exports.b = '原始值-b模块内变量'
+console.log('b模块执行')
+var c = require('./c')
+
+// c.js
+module.exports.c = '原始值-c模块内变量'
+console.log('c模块执行')
+
+// 执行结果如下：a模块执行 c模块执行 b模块执行
+```
+可以看到，c模块只被执行了一次，当第二次引用c模块时，发现已经有缓存，则直接读取，而不会再去执行一次
+
+### commonjs、es module导出变量的区别
+``` js
+// b.mjs
+export let count = 1;
+export function add() {
+  count++;
+}
+export function get() {
+  return count;
+}
+
+// a.mjs
+import { count, add, get } from './b.mjs';
+console.log(count);    // 1
+add();
+console.log(count);    // 2
+console.log(get());    // 2
+```
+如果用commonjs实现的话
+``` js
+// a.js
+let count = 1;
+module.exports = {
+  count,
+  add() {
+    count++;
+  },
+  get() {
+    return count;
+  }
+};
+
+// index.js
+const { count, add, get } = require('./a.js');
+console.log(count);    // 1
+add();
+console.log(count);    // 1
+console.log(get());    // 2
+```
 
 ## 包安装机制
 当我们发出npm install命令，先查询node_modules目录之中是否已经存在指定模块，若存在，不再重新安装，若不存在：npm 向

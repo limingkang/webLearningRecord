@@ -82,4 +82,13 @@ module.exports = [
       ['/algorithm/two', '手写函数']
     ]
   },
+  {
+    title: '思考',
+    path: '/',
+    collapsable: false,
+    children: [
+      ['/think/mess', '杂谈'],
+      ['/think/css', 'css方法论']
+    ]
+  },
 ]

@@ -307,6 +307,57 @@ JS 引擎是独立于渲染引擎存在的。我们的 JS 代码在文档的何�
 
 外部样式会阻塞后面内联脚本的执行；外部样式不会阻塞外部脚本的加载，但会阻塞外部脚本的执行；对于具有async属性的脚本，外部css不会阻塞
 
+## es6 module循环引入
+ES module会根据import关系构建一棵依赖树，遍历到树的叶子模块后，然后根据依赖关系，反向找到父模块，将export/import指向同一地址
+
+ES module导出的是一个索引——内存地址，它依赖的是“模块地图”和“模块记录”，模块地图在下面会解释，而模块记录是好比每
+个模块的“身份证”，记录着一些关键信息——这个模块导出值的的内存地址，加载状态，在其他模块导入时，会做一个“连接”——根据模块记录，把导
+入的变量指向同一块内存，这样就是实现了动态绑定
+
+来看下面这个例子，和之前的demo逻辑一样：入口模块引用a模块，a模块引用b模块，b模块又引用a模块，这种ab模块相互引用就形成了循环
+``` js
+// index.mjs
+import * as a from './a.mjs'
+console.log('入口模块引用a模块：',a)
+
+// a.mjs
+let a = "原始值-a模块内变量"
+export { a }
+import * as b from "./b.mjs"
+console.log("a模块引用b模块：", b)
+a = "修改值-a模块内变量"
+
+// b.mjs
+let b = "原始值-b模块内变量"
+export { b }
+import * as a from "./a.mjs"
+console.log("b模块引用a模块：", a)
+b = "修改值-b模块内变量"
+```
+![An image](./images/2.png)
+值得一提的是，import语句有提升的效果，实际执行可以看作这样：
+``` js
+// index.mjs
+import * as a from './a.mjs'
+console.log('入口模块引用a模块：',a)
+
+// a.mjs
+import * as b from "./b.mjs"
+let a = "原始值-a模块内变量"
+export { a }
+console.log("a模块引用b模块：", b)
+a = "修改值-a模块内变量"
+
+// b.mjs
+import * as a from "./a.mjs"
+let b = "原始值-b模块内变量"
+export { b }
+console.log("b模块引用a模块：", a)
+b = "修改值-b模块内变量"
+```
+总结一下：和上面一样，循环引用要解决的无非是两个问题，保证不进入死循环以及输出什么值。ES Module来处理循环使用一张模块间的依赖地图
+来解决死循环问题，标记进入过的模块为“获取中”，所以循环引用时不会再次进入；使用模块记录，标注要去哪块内存中取值，将导入导出做连接，解
+决了要输出什么值
 
 
 ## 杂物
