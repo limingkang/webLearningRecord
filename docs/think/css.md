@@ -365,6 +365,68 @@ h1 {
 }
 ```
 
+### （6）COMPONENTS
+第六层 COMPONENTS 表示 UI 组件，与对象不用，组件是页面的特定部分。比如搜索框的样式，为组件定义的样式只会影响到对应的组件。这一层比上一层更加明确，因
+为现在为 DOM 设计了明确的样式
+``` scss
+.c-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ...
+
+  &--primary {
+    background-color: #ff5959;
+    color: #fff;
+  }
+
+  &--large {
+    font-size: 16px;
+    padding: 16px 14px;
+    ...
+  }
+}
+```
+
+### （7）TRUMPS
+这一层也称为 Utilities，包含所有那些覆盖之前层中定义的任何其他规则的规则。它是唯一允许使用 !important 的层
+``` css
+.d-none {
+  display: none!important;
+}
+```
+
+### （8）项目结构
+那这七层结构的 CSS 文件该如何组织呢？主要有两种方式：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
