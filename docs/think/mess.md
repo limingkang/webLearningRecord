@@ -373,3 +373,322 @@ app("cats");
 其实函数式编程好还是命令式编程好，没有最好，只是最合适，大家从一开始到中级左右的时候，都会产生一个误区，就是面向对象的写法很好，很牛逼，比面向过程要
 好用；其实呢，这是一个很严重的误区，当大家在往上走得时候，就会发现，其实好坏都是针对场景，没有谁敢说什么是最好的，假如我们要做一个专题页，这时候使
 用 react 或者 vue 其实是最烂的方法，或者说什么我封装一个选项卡，我写的怎么怎么好，没那个必要
+
+## Mpx如何做splitChunks
+[MPX](https://mpxjs.cn/)是滴滴出品的一款增强型小程序跨端框架，其核心是对原生小程序功能的增强。具体的使用不是本文讨论的范畴，想了解更多可以去官网了解更多
+
+回到正题，使用MPX开发小程序有一段时间了，该框架对不同包之间的共享资源有一套自己的构建输出策略，其官网有这样一段描述说明：
+![An image](./images/15.png)
+总结关键的两点：
+- 纯js资源：主包引用则输出主包，或者分包之间共享也输出到主包
+- 非js资源，包括wxml、样式、图片等：主包引用则输出主包，分包之间共享则输出到各自分包
+
+首先简单介绍下MPX是怎么整合小程序离散化的文件结构，它基于webpack打包构建的，用户在Webpack配置中只需要配置一个入口文件app.mpx，它会基于依赖分析和动态添加entry的
+方式来整合小程序的离散化文件，，loader会解析json配置文件中的pages域和usingComponents域中声明的路径，通过动态添加entry的方式将这些文件添加到Webpack的构建系统
+当中，并递归执行这个过程，直到整个项目中所有用到的.mpx文件都加入进来
+
+重点来了，MPX在输出前，其借助了webpack的SplitChunksPlugin的能力将复用的模块抽取到一个外部的bundle中，确保最终生成的包中不包含重复模块
+
+### js资源模块的输出
+`@mpxjs/webpack-plugin`插件是MPX基于webapck构建的核心，其会在webpack所有模块构建完成的finishMoudles钩子中来实现构建输出策略，主要是配置SplitChunks的
+cacheGroup，后续webpack代码优化阶段会根据SplitChunks的配置来输出代码
+``` js
+apply(compiler) {
+  ...
+  // 拿到webpack默认配置对象splitChunks
+  let splitChunksOptions = compiler.options.optimization.splitChunks
+  // 删除splitChunks配置后，webpack内部就不会实例化SplitChunkPlugin
+  delete compiler.options.optimization.splitChunks
+  // SplitChunkPlugin的实例化由mpx来接管,这样可以拿到其实例可以后续对其options进行修正
+  let splitChunksPlugin = new SplitChunksPlugin(splitChunksOptions)
+  splitChunksPlugin.apply(compiler)
+  ...
+
+  compilation.hooks.finishModules.tap('MpxWebpackPlugin', (modules) => {
+      // 自动跟进分包配置修改splitChunksPlugin配置
+      if (splitChunksPlugin) {
+        let needInit = false
+        Object.keys(mpx.componentsMap).forEach((packageName) => {
+          if (!splitChunksOptions.cacheGroups.hasOwnProperty(packageName)) {
+            needInit = true
+            splitChunksOptions.cacheGroups[packageName] = getPackageCacheGroup(packageName)
+          }
+        })
+        if (needInit) {
+          splitChunksPlugin.options = SplitChunksPlugin.normalizeOptions(splitChunksOptions)
+        }
+      }
+  })
+}
+```
+可以看出在所有模块构建完成时，针对不同的packageName来生成其对应的cacheGroups，主要体现在getPackageCacheGroup方法的实现
+``` js
+function isChunkInPackage (chunkName, packageName) {
+  return (new RegExp(`^${packageName}\\/`)).test(chunkName)
+}
+
+function getPackageCacheGroup (packageName) {
+  if (packageName === 'main') {
+    return {
+      name: 'bundle',
+      minChunks: 2,
+      chunks: 'all'
+    }
+  } else {
+    return {
+      test: (module, chunks) => {
+        return chunks.every((chunk) => {
+          return isChunkInPackage(chunk.name, packageName)
+        })
+      },
+      name: `${packageName}/bundle`,
+      minChunks: 2,
+      minSize: 1000,
+      priority: 100,
+      chunks: 'all'
+    }
+  }
+}
+```
+getPackageCacheGroup会为小程序的每个包生成一个代码分割组，也就是生成每个包对应的`cacheGroups`
+
+例如一个小程序项目有主包和A、B两个分包，其生成的cacheGroups内容如下：
+``` js
+{
+  default: {
+    automaticNamePrefix: '',
+    reuseExistingChunk: true,
+    minChunks: 2,
+    priority: -20
+  },
+  vendors: {
+    automaticNamePrefix: 'vendors',
+    test: /[\\/]node_modules[\\/]/,
+    priority: -10
+  },
+  // 会抽取到主包的bundle文件的条件 :
+  // 该模块至少被2个chunk引用（minChunks:2），这个chunk不区分主分包中的chunk
+  main: { name: 'bundle', minChunks: 2, chunks: 'all' },
+  A: {
+    test: [Function: test],
+    name: 'A/bundle',
+    minChunks: 2,
+    minSize: 1000,
+    priority: 100,
+    chunks: 'all'
+  },
+  B: {
+    test: [Function: test],
+    name: 'B/bundle',
+    minChunks: 2,
+    minSize: 1000,
+    priority: 100,
+    chunks: 'all'
+  }
+}
+```
+分包代码分割输出bundle的优先级是最高的（priority: 100），所以会优先处理分包中的打包；否则会执行main中的代码打包规则，它会处理所有包之间的共享模块的打包
+以及主包中被复用的模块,下面来看分包和主包的打包规则
+
+### 针对分包中的模块:
+``` js
+{
+  test: (module, chunks) => {
+    // 依赖当前模块的所有chunks是否都是当前分包下的chunk
+    return chunks.every((chunk) => {
+      return isChunkInPackage(chunk.name, packageName)
+    })
+  },
+  name: `${packageName}/bundle`,
+  minChunks: 2,
+  minSize: 1000,
+  priority: 100,
+  chunks: 'all'
+}
+```
+分包中的模块被抽离到当前分包下的bundle文件中，否则会被打到主包，需满足：
+1. 该模块没有被其他包引用，包括主包和其他分包（test函数逻辑）
+2. 至少被该分包下的2个chunk引用（minChunks:2）
+3. 抽离后的bundle大小最少满足 约1kb（minSize: 1000）
+
+### 组件和静态资源
+对于组件和静态资源，MPX在webpack构建的thisCompilation钩子函数中会在compilation上挂载一个有关打包的__mpx__对象，包含静态资源、组件资源、页面资源
+等属性，也包含静态的非js资源的输出处理等：
+``` js
+compiler.hooks.thisCompilation.tap('MpxWebpackPlugin', (compilation, { normalModuleFactory }) => {
+    ...
+    if (!compilation.__mpx__) {
+        mpx = compilation.__mpx__ = {
+             ...
+             componentsMap: {
+                main: {}
+              },
+              // 静态资源(图片，字体，独立样式)等，依照所属包进行记录，冗余存储，同上
+              staticResourcesMap: {
+                main: {}
+              },
+              ...
+              // 组件和静态资源的输出规则如下：
+              // 1. 主包引用的资源输出至主包
+              // 2. 分包引用且主包引用过的资源输出至主包，不在当前分包重复输出
+              // 3. 分包引用且无其他包引用的资源输出至当前分包
+              // 4. 分包引用且其他分包也引用过的资源，重复输出至当前分包
+          getPackageInfo: ({ resource, outputPath, resourceType = 'components', warn }) => {
+            let packageRoot = ''
+            let packageName = 'main'
+            const { resourcePath } = parseRequest(resource)
+            const currentPackageRoot = mpx.currentPackageRoot
+            const currentPackageName = currentPackageRoot || 'main'
+            const resourceMap = mpx[`${resourceType}Map`]
+            const isIndependent = mpx.independentSubpackagesMap[currentPackageRoot]
+            // 主包中有引用一律使用主包中资源，不再额外输出
+            if (!resourceMap.main[resourcePath] || isIndependent) {
+              packageRoot = currentPackageRoot
+              packageName = currentPackageName
+              ...
+            }
+            resourceMap[packageName] = resourceMap[packageName] || {}
+            const currentResourceMap = resourceMap[packageName]
+
+            let alreadyOutputed = false
+            if (outputPath) {
+              outputPath = toPosix(path.join(packageRoot, outputPath))
+              // 如果之前已经进行过输出，则不需要重复进行
+              if (currentResourceMap[resourcePath] === outputPath) {
+                alreadyOutputed = true
+              } else {
+                currentResourceMap[resourcePath] = outputPath
+              }
+            } else {
+              currentResourceMap[resourcePath] = true
+            }
+
+            return {
+              packageName,
+              packageRoot,
+              outputPath,
+              alreadyOutputed
+            }
+          },
+          ...
+        }
+    }
+}
+```
+这样webpack构建编译非js资源时会调用compilation.__mpx__.getPackageInfo方法返回非js的静态资源的输出路径, 下面以一个简单例子来说明
+
+例如对项目中的图片会调用@mpxjs/webpack-plugin提供的url-loader进行处理，与webpack的url-loader类似，对于图片大小小于指定limit的进行base64处理，否
+则使用file-loader来输出图片（此时需要调用getPackageInfo方法获取图片的输出路径），相关代码：
+``` js
+let outputPath
+
+if (options.publicPath) { // 优先loader配置的publicPath
+    outputPath = url
+    if (options.outputPathCDN) {
+        if (typeof options.outputPathCDN === 'function') {
+            outputPath = options.outputPathCDN(outputPath, this.resourcePath, context)
+        } else {
+        outputPath = toPosix(path.join(options.outputPathCDN, outputPath))
+        }
+    }
+} else {
+    // 否则，调用getPackageInfo获取输出路径
+    url = outputPath = mpx.getPackageInfo({
+        resource: this.resource,
+        outputPath: url,
+        resourceType: 'staticResources',
+        warn: (err) => {
+            this.emitWarning(err)
+        }
+    }).outputPath
+}
+...
+this.emitFile(outputPath, content);  
+...
+```
+最终，图片资源会调用compilation.__mpx__.getPackageInfo方法来获取图片资源的输出路径进行产出
+
+同样对于css资源、wxml资源以及json资源，mpx内部是通过创建子编译器来抽取的，这里就不做深入介绍
+
+
+### splitChunks的用法
+webpack的splitChunks插件是用来进行代码拆分的，通过上面的分析可以看出MPX内部是通过内置splitChunks的cacheGroups配置项来主动实现对小程序js模
+块实现分割优化的。webpack常见的代码分割方式有三种：
+1. 多入口分割：webpack的entry配置项配置的手动入口，也包括可以使用compilation.addEntry程序添加的入口
+2. 动态导入：使用es module的import方法和wepack独有的require.ensure
+3. 防止重复：使用splitChunks来去重和分离chunk
+
+前两种在我们日常的开发中比较常见，第三种是通过webpack的optimization.splitChunks配置项来配置的
+
+通常情况下，webpack配置项optimization.splitChunks会有默认配置来实现代码分割，上面我们说到MPX在为不同包生成cacheGroups时，细心的同学会发现
+我们最终生成的包多了两个配置组：
+``` js
+{
+  default: {
+    automaticNamePrefix: '',
+    reuseExistingChunk: true,
+    minChunks: 2,
+    priority: -20
+  },
+  vendors: {
+    automaticNamePrefix: 'vendors',
+    test: /[\\/]node_modules[\\/]/,
+    priority: -10
+  },
+  ...
+}
+```
+这是webpack为optimization.splitChunks.cacheGroups配置的默认组，除此之外optimization.splitChunks还有一些其他默认配置项，如下代码所示：
+``` js
+splitChunks: {
+    chunks: "async",
+    minSize: 30000,
+    minChunks: 1,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    automaticNameDelimiter: '~',
+    name: true,
+    cacheGroups: {
+        vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+        },
+        default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+        }
+    }
+}
+```
+上面默认配置的实现的效果是：满足下面4个条件的模块代码会抽离成新的chunk
+1. 来自node_modules中的模块，或者至少被2个chunk复用的模块代码
+2. 分离出的chunk必须大于等于3000byte，约30kb
+3. 按需异步加载chunk时，并行请求的最大数不超过5个
+4. 页面初始加载时，并行请求的最大数不超过3个
+
+下面来介绍下这些配置项的作用：
+- chunks：表示webpack将对哪些chunk进行分割，可选值为async、all、initial
+    1. async：对于异步加载的chunks进行分割
+    2. initial：对非异步加载的初始chunks进行分割
+    3. all：对所有chunks进行分割
+- minSize: 分割后的chunk要满足的最小大小，否则不会分割
+- minChunks: 表示一个模块至少应被minChunks个chunk所包含才能分割
+- maxAsyncRequests: 表示按需加载异步chunk时，并行请求的最大数目；这个数目包括当前请求的异步chunk以及其所依赖chunk的请求
+- maxInitialRequests: 表示加载入口chunk时，并行请求的最大数目
+- automaticNameDelimiter: 表示拆分出的chunk的名称连接符，默认为~。如chunk~vendors.js
+- name: 设置chunk的文件名，默认为true，表示splitChunks基于chunk和cacheGroups的key自动命名。
+- cacheGroups: 通过它可以配置多个组，实现精细化分割代码；
+    1. 该对象配置属性继承splitChunks中除cacheGroups外所有属性，可以在该对象重新配置这些属性值覆盖splitChunks中的值
+    2. 该对象还有一些特有属性如test、priority和reuseExistingChunk等
+
+- cacheGroups配置的每个组可以根据test设置条件，符合test条件的模块，就分配到该组。模块可以被多个组引用，但最终会根据priority来决定打包到哪个组中
+
+
+
+
+
+
+
+
+

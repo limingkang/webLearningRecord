@@ -398,37 +398,66 @@ h1 {
 
 ### （8）项目结构
 那这七层结构的 CSS 文件该如何组织呢？主要有两种方式：
+![An image](./images/13.png)
+文件名使用层的名字作为前缀：
+![An image](./images/14.png)
+在使用样式时，就需要按照层的顺序来引用这些 CSS，就像这样：
+``` css
+@import "settings.global.scss";
+@import "settings.colors.scss";
 
+@import "tools.functions.scss";
+@import "tools.mixins.scss";
 
+@import "generic.box-sizing.scss";
+@import "generic.normalize.scss";
 
+@import "elements.headings.scss";
+@import "elements.links.scss";
 
+@import "objects.wrappers.scss";
+@import "objects.grid.scss";
 
+@import "components.site-nav.scss";
+@import "components.buttons.scss";
+@import "components.carousel.scss";
+```
 
+## ACSS
+ACSS 的全称为 Atomic CSS，意为原子CSS。它专注于创建很多小型的 CSS 样式类，以便在 HTML 上使用。这种方法旨在提供高度精细和可重用的样式，而不是为每
+个组件提供规则。这可以减少特异性（优先级）冲突并以可预测的方式使样式更具可变性。这种方法有助于减少代码冗余和覆盖 CSS 样式的混淆
 
+参考以下代码：
+``` css
+.mb-sm { margin-bottom: 16px; }
+.mb-lg { margin-bottom: 32px; }
+.color-blue { color: #1e90ff; }
+```
+在HTML中这样来使用：
+``` html
+<div class="mb-lg">
+ <p class="mb-lg color-blue">Blue text</p>
+ <img class="mb-sm" />
+</div>
+```
+ACSS 有一些编程方法，可以根据用户添加到 HTML 的类或属性自动生成 CSS。Atomizer 就是这样的一个工具，它允许将 HTML 进行如下定义：
+``` html
+<div class="Mb(32px)">
+ <p class="Mb(32px) C(#1e90ff)">Blue text</p>
+ <img class="Mb(16px)" />
+</div>
+```
+这样在构建时就会自动生成以下CSS：
+``` css
+.Mb\(16px\)   
+{ margin-bottom: 16px; }
+.Mb\(32px\)   
+{ margin-bottom: 32px; }
+.C\(#1e90ff\) { color: #1e90ff; }
+```
+注意，单独使用 ACSS 会导致类的数量多到难以管理，并且 HTML 结构会非常臃肿。因此，通常只会使用 ACSS 原则来创建定义一致、可重用的声明块的辅助类
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+具体可以直接使用tailwindcss来试试
+[tailwind](https://www.tailwindcss.cn/)
 
 

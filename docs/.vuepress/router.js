@@ -14,7 +14,8 @@ module.exports = [
     collapsable: false,
     children: [
       ['/web-consttruct/singleSpa', 'single-spa方式实现'],
-      ['/web-consttruct/mySingleSpa', '自己实现一个微前端']
+      ['/web-consttruct/mySingleSpa', '自己实现一个微前端'],
+      ['/web-consttruct/mircoapp', 'microapp']
     ]
   },
   {
