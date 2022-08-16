@@ -88,7 +88,7 @@ export default {
 │   ├── iife
 │   │   └── bundle.js
 │   ├── system
-│   │   └── bundle.js
+│   │   └── bundle.js (SystemJS 加载器的原生格式 （别名：systemjs))
 │   └── umd
 │       └── bundle.js
 ```

@@ -365,7 +365,7 @@ undefined 在 ES5 中已经是全局对象的一个只读（read - only）属性
 void 运算符能对给定的表达式进行求值，然后返回 undefined。也就是说，void 后面你随便跟上一个表达式，返回的都是 undefined，
 如 void (2), void (‘hello’) 。并且void是不能被重写的。但为什么是void 0 呢，void 0 是表达式中最短的。用 void 0 代
 替 undefined 能节省字节。不少 JavaScript压缩工具在压缩过程中，正是将 undefined 用 void 0 代替掉了
-
+[什么时候不能使用箭头函数](https://juejin.cn/post/7103702621369663518)
 [各种框架中文文档](https://docschina.org/)
 [众多工具集合，包括时间戳转换，进制转换等](https://tool.lu/)
 

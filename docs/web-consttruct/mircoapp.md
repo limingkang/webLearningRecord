@@ -1,17 +1,19 @@
 ## 选型
-市面上实现微前端的框架，可供选择的有iframe、sigle-spa、web components、webpack5 module federation、qiankun和microApp
+市面上实现微前端的框架，可供选择的有iframe、sigle-spa、web components、webpack5 module federation、无界方案、qiankun和microApp
 1. single-spa太过于基础，对原有项目的改造过多，成本太高
 2. iframe在所有微前端方案中是最稳定的、上手难度最低的，但它有一些无法解决的问题，例如性能低、通信复杂、双滚动条、弹窗无法全局
 覆盖，它的成长性不高，只适合简单的页面渲染
 3. web components 不推荐，无法提供模块化功能，项目越大，越容易失控，web component 本质是封装自定义的 html,想想jQuery的问题
-4. webpack5 module federation，webpack全新思路，而且可以导出某个项目的某个组件，可惜的是wepack5啊，不能限制子项目的使用框架是基本原则，即便都是
-webpack,读他的源码难度成本相对高些，一旦出现google不出的问题，how to do
+4. webpack5 module federation，webpack全新思路，而且可以导出某个项目的某个组件，可惜的是wepack5啊，不能限制子项目的使用框架是基本原则，而且没有有效的 css 沙箱和 js 沙箱，
+需要靠用户自觉,多应用激活无法实现
 5. 当然还有微盟、头条等很多大厂均会有自己的框架，来完美切合自己项目的需求，没有真完美微前端方案，无论什么方案在复杂的浏览器加载环境，运行环境下终会出错
+6. 无界方案个人比较看好的方案，但是生态不够
 
-忠告: 不同于vue、react等框架易于测试, 切记如果使用某个微前端框架必读其源码，可以讲他必会出问题
+<!-- 忠告: 不同于vue、react等框架易于测试, 切记如果使用某个微前端框架必读其源码，可以讲他必会出问题 -->
 
 剩下的市面上就只有两种，就看自己选择了qiankun和microApp，我选择的理由，只可以讲符合我个人想法
 ![An image](./images/4.png)
+[microApp](https://micro-zoe.github.io/micro-app/docs.html#/) [qiankun](https://qiankun.umijs.org/zh/guide)
 
 上面是网上给的图可以知道他们大概的不同，就说几点通信机制props和发布订阅各有利弊不该作为分割标准，接入其实都很简单，至于静态资源的路径自动补全，怎么说呢不太需要，大多情况我们
 都是都过publicpath的配置来解决，qiankun还能支持ie给他打polyfill即可
@@ -33,6 +35,22 @@ webpack,读他的源码难度成本相对高些，一旦出现google不出的问
 简单来说基座应用和子应用都有一个元素`<div id='root'></div>`，此时子应用通过document.querySelector('#root')获取到的是自己内部的#root元素，而不是基座应用的
 
 #### 综上对与我们的项目，任意子项目可能组合，静态资源不规范每个人都会根据情况胡乱升级改版本例如elementui,技术上想保持多元化，接入上想尽量简单不用装什么包等，还是玩玩mircoapp吧
+同样的他所面临的问题也不少，例如css 沙箱依然无法绝对的隔离，js 沙箱做全局变量查找缓存，性能有所优化；虽然支持 vite 运行，但必须使用 plugin 改
+造子应用，且 js 代码没办法做沙箱隔离；对于不支持 webcompnent 的浏览器没有做降级处理等等
+
+#### 无界方案
+无界微前端方案基于 webcomponent 容器 + iframe 沙箱，能够完善的解决适配成本、样式隔离、运行性能、页面白屏、子应用通信、子应用保活、多应用激活、vite 框架支持、应用共享等用户的核心诉求
+
+1. 无界微前端非常快，主要体现在首屏打开快、运行速度快两个方面
+2. 目前大部分微前端只能做到静态资源预加载，但是就算子应用所有资源都预加载完毕，等到子应用打开时页面仍然有不短的白屏时间，这部分白屏时间主要是子应用 js 的解析和执行
+3. 无界微前端不仅能够做到静态资源的预加载，还可以做到子应用的预执行
+4. 预执行会阻塞主应用的执行线程，所以无界提供 fiber 执行模式，采取类似 react fiber 的方式间断执行 js，每个 js 文件的执行都包裹在 requestidlecallback 中，每执行一个 js 可以返回响
+应外部的输入，但是这个颗粒度是 js 文件，如果子应用单个 js 文件过大，可以通过拆包的方式降低体积达到 fiber 执行模式效益最大化
+5. 子应用的 js 在 iframe 内运行，由于 iframe 是一个天然的 js 运行沙箱，所以无需采用 with ( fakewindow ) 这种方式来指定子应用的执行上下文，从而避免由于采用 with 语句执行子应用代码
+而导致的性能下降，整体的运行性能和原生性能差别不大
+6. 无界微前端实现了 css 沙箱和 js 沙箱的原生隔离，子应用不用担心污染问题
+7. 无界子应用运行在 iframe 中原生支持 esm 的脚本，而且不用担心子应用运行的上下文问题，因为子应用读取的就是 iframe 的 window 上下文，所以无界微前端原生支持 vite 框架
+不做过多介绍了，大家直接看文档[wujie](https://wujie-micro.github.io/doc/guide/)
 
 ## 渲染篇
 和micro-app一样，我们的简易微前端框架设计思路是像使用iframe一样简单，而又可以避免iframe存在的问题，其使用方式如下：
