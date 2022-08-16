@@ -65,7 +65,7 @@ $ docker container rm [containerID]
 # FROM指定一个基础镜像，且必须为Dockerfile文件开篇的每个非注释行,至于image则可以是任何合理存在的image镜像
 # FROM可以在一个Dockerfile中出现多次，以便于创建混合的images。如果没有指定tag,latest将会被指定为要使用的基础镜像版本
 # AS name,可以给新的构建阶段赋予名称。该名称可用于后续FROM 和 COPY --from=<name | index>说明可以引用此阶段中构建的镜像
-FROM harbor.emotibot.com/image-base/node:10.9.0-jessie AS build-env
+FROM xxxxxxxxxxxxx/image-base/node:10.9.0-jessie AS build-env
 # 将当前目录下的所有文件（除了.dockerignore排除的路径），都拷贝进入 image 文件的/app目录
 COPY . /app
 # 指定接下来的工作路径为/app
