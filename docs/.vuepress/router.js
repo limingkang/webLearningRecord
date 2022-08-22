@@ -84,12 +84,13 @@ module.exports = [
     ]
   },
   {
-    title: '思考',
+    title: '随笔',
     path: '/',
     collapsable: false,
     children: [
       ['/think/mess', '杂谈'],
-      ['/think/css', 'css方法论']
+      ['/think/css', 'css方法论'],
+      ['/think/svelte', 'svelte']
     ]
   },
 ]

@@ -84,6 +84,10 @@ ENTRYPOINT ["./entrypoint.sh"]
 ``` shell
 # 查看某个服务的状态
 docker ps|grep $name
+# 查看所有容器
+docker ps -a
+# 查看所有镜像
+docker images
 # 停用某个服务
 docker kill $imageId
 # 删除本地docker镜像

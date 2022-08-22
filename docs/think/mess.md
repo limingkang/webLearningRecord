@@ -684,11 +684,39 @@ splitChunks: {
 
 - cacheGroups配置的每个组可以根据test设置条件，符合test条件的模块，就分配到该组。模块可以被多个组引用，但最终会根据priority来决定打包到哪个组中
 
+## tencent/omi
+OMI 是前端跨框架框架，您可以使用 JSX/TSX 编写标准的 Web Components 的自定义元素(Custom Elements)，通过自定义元素，Web 开发人员可以创建新的 HTML 标
+记，增强现有HTML标记，或者扩展其他开发人员编写的组件，然后像使用 HTML 标签一样使用他们，比如:
+``` js
+const yourEl = document.createElement('your-omi-element')
+document.querySelector('your-omi-element').addEventListener('event-name', eventHandler)
+document.body.appendChild(yourEl)
+// <your-omi-element></your-omi-element>
+```
+除了定义标准的自定义标签，您也可以使用 OMI 构建整个应用程序
+``` tsx
+import { tag, WeElement, h, render } from 'omi'
+import './your-omi-element'
+import './another-omi-element'
 
+@tag('my-app')
+class MyApp extends WeElement {  
+  render(props) {
+    return (
+      <>
+        <your-omi-element></your-omi-element>
+        <another-omi-element></another-omi-element>
+      </>
+    )
+  }
+}
 
+render(<my-app />, 'body')
+```
+基于丰富的自定义元素开发应用程序，代码更精简，模块化、重用性更强;
 
+其实更通俗的理解是，如何写一个组件他的样式是隔离的，他是不依赖任何框架的，这就是Web Components Shadow dom，没有这些之前你用twitter审查元素你会发现他一个小按钮竟然是一个iframe，以
+此来做到强制隔离，但是不优雅，但是你用它还得考虑到优雅降级
 
-
-
-
+OMI 互动教程可以通过[omijs.org](https://omi.cdn-go.cn/play/latest/index.html) 或者[tencent.github.io/omi/](https://tencent.github.io/omi/) 找到入口。
 
