@@ -90,7 +90,8 @@ module.exports = [
     children: [
       ['/think/mess', '杂谈'],
       ['/think/css', 'css方法论'],
-      ['/think/svelte', 'svelte']
+      ['/think/svelte', 'svelte'],
+      ['/think/frame', '框架']
     ]
   },
 ]
