@@ -450,58 +450,382 @@ function parse(str) {
 ``` js
 // 用上下文的好处就是防止臃肿，可以随意添加操作方法
 function traverseNode(ast, context) {
-    const currentNode = ast;
-    
-    const child = currentNode.children
+    context.currentNode = ast;
+    const exitFns = []; // 用来存储节点处理完毕时候，需要处理的方法
     const transform = context.nodeTransforms
     for(let i = 0; i<transform.length;i++) {
-            transform[i](currentNode, context)
+        // 处理当前节点，并返回该节点处理完毕后需要操作的回掉函数
+        const onExit = transform[i](context.currentNode, context)
+        if (onExit) {
+            exitFns.push(onExit);
         }
+        // 每一次处理节点都可能会删除节点，所以得加个判段
+        if (!content.currentNode) return;
+    }
+    const child = context.currentNode.children;
     if (child) {
         for(let i = 0; i<child.length;i++) {
+            context.parent = context.currentNode;
+            context.childIndex = i ;       
             traverseNode(child[i], context)
         }
+    }
+    let i = exitFns.length;
+    while(i--) {
+        exitFns[i]();
     }
 }
 function transform(ast) {
     const context = {
+        currentNode: null,
+        parent: null,
         nodeTransforms: [
             transformElement,
         ],
+        replaceNode(node) { // 替换节点
+            context.currentNode = node;
+            context.parent.children[context.childIndex] = node;
+        },
+        removeNode() { // 移除节点
+            if (context.parent) {
+                context.parent.children.splice(context.childIndex, 1)
+                context.currentNode = null
+            }
+        },
     }
     traverseNode(ast, context)
 }
-function transformElement(node) {
+function transformElement(node, context) {
     if (node.type === 'Element' && node.tag === 'p') {
         node.tag = 'h1'
     }
+    return () => {
+        // 退出节点逻辑,在这里处理转换js ast的代码，这里可以保证该标签子节点已经处理完毕
+    }
 }
 ```
+接下来将模板ast转换成javascript ast
+``` js
+// 已该模板为例子，生成的render大概如下
+// <div><p>vue</p><p>template</p></div>
+// function render() {
+//     return h('div', [
+//         h('p', 'vue'),
+//         h('p', 'template')
+//     ])
+// }
+
+// 创建标示符Identifier节点
+function createIdentifier(name) {
+    return {
+        type: 'Identifier',
+        name,
+    }
+}
+// 我们可以使用CallExpression来描述函数调用语句
+function createCallExpression(callee, arguments) {
+    return {
+        type: 'CallExpression',
+        callee: createIdentifier(callee)
+        arguments,
+    }
+}
+// h函数的第一个变量是字符串字面量，可以使用StringLiteral来描述
+function createStringLiteral(value) {
+    return {
+        type: 'StringLiteral',
+        value,
+    }
+}
+// h函数第二个变量是数组,使用ArrayExpression来描述
+function createArrayExpression(elements) {
+    return {
+        type: 'ArrayExpression',
+        elements,
+    }
+}
+```
+此时我们可以完备transformElement函数的return值
+``` js
+function transformText(node, context) {
+    if (node.type !== 'Text') {
+        return;
+    }
+    // 字符串不需要放在回掉里面，直接创建即可，并保存到node.jsNode上
+    node.jsNode = createStringLiteral(node.content)
+}
+function transformElement(node, context) {
+    // ..........
+    return () => {
+        if (node.type !== 'Element') {
+            return;
+        }
+        const callExp = createCallExpression('h',[
+            createStringLiteral(node.tag)
+        ])
+        node.children.length === 1 ? callExp.arguments.push(node.children[0].jsNode) :
+            callExp.arguments.push(createArrayExpression(node.children.map((item) => item.jsNode)))
+        node.jsNode = callExp
+    }
+}
+// 最后一步转换根节点，上面只能生产h函数，根生产render函数
+function transformRoot(node) {
+    return () => {
+        if (node.type !== 'Root') {
+            return;
+        }
+        // 根节点的第一个子节点就是模板根节点，暂时不考虑模板多个根节点
+        const vnodejsast = node.children[0].jsNode;
+        node.jsNode == {
+            type: 'FunctionDecl',
+            id: { type: 'Identifier', name: 'render' },
+            params: [],
+            body: [
+                { type: 'ReturnStatement', return: vnodejsast }
+            ]
+        }
+    }
+}
+```
+接下来我们进行最后一步，通过js ast来生成代码，也就是render函数
+``` js
+function compile(template) {
+    // 模板ast
+    const ast = parse(template)
+    // 模板ast转换js ast
+    transform(ast)
+    // 代码生成
+    const code = generate(ast.jsNode)
+    return code;
+}
+function generate(node) {
+    const context = {
+        code: '',
+        push(code) {
+            context.code += code
+        },
+        // 当前缩进的级别，为了让代码更好看
+        currentIndent: 0,
+        // 函数的换行并且缩进
+        newLine() {
+            context.node += '\n' + '  '.repeat(context.currentIndent)
+        },
+        indent() {
+            context.currentIndent++
+            context.newLine()
+        },
+        deIndent() {
+            context.currentIndent--
+            context.newLine()
+        }
+    }
+    genNode(node, context)
+    return context.code
+}
+// genNode就是匹配ast节点，调用对应的生成函数即可
+function genNode(node, context) {
+    switch(node.type) {
+        case 'FunctionDecl'
+            genFunctionDecl(node, context)
+            break
+        case 'ReturnStatement'
+            genReturnStatement(node, context)
+            break
+        case 'CallExpression'
+            genCallExpression(node, context)
+            break
+        case 'StringLiteral'
+            genStringLiteral(node, context)
+            break
+        case 'ArrayExpression'
+            genArrayExpression(node, context)
+            break
+    }
+}
+```
+接下来我们来完善对应的处理函数
+``` js
+function genFunctionDecl(node, context) {
+    const { push, indent, deIndent } = context;
+    push(`function ${node.id.name}`)
+    push('(')
+    genNodeList(node.params, context)
+    push(')')
+    push('{')
+    indent()
+    node.body.foreach(n => genNode(n, context))
+    deIndent()
+    push('}')
+}
+function genNodeList(nodes, context) {
+    const { push } = context;
+    for (let i = 0; i<nodes.length;i++) {
+        const node = nodes[i]
+        genNode(node, context)
+        if (i<nodes.length-1) {
+            push(',')
+        }
+    }
+}
+function genArrayExpression(node, context) {
+    const { push } = context
+    push('[')
+    genNodeList(node.elements, context)
+    push(']')
+}
+function genReturnStatement(node, context) {
+    const { push } = context
+    push('return')
+    genNodeList(node.return, context)
+}
+function genStringLiteral(node, context) {
+    const { push } = context
+    push(node.value)
+}
+function CallExpression(node, context) {
+    const { push } = context
+    const { callee, arguments: args } = node
+    push(`${callee.name}(`)
+    genNodeList(args, context)
+    push(')')
+}
+// 如此最终生成如下结束
+// function render() {
+//     return h('div', [ h('p', 'vue'), h('p', 'template')])
+// }
+```
+浏览器对html文本的解析是有规范的，WHATWG关于html实体解析的规范给出了完整的错误处理和状态机的状态迁移流程，包括一些特殊的状态例如DATA CDATA RCDATA
+RAWTEXT等，解析器在不通的模式下会有不同的解析状态，其初始模式是DATA模式，vue的解析器在遇到script标签时候会进入到RAWTEXT模式，这些模式就是上面提到的状态
+
+上面提到了构造ast的方法，是一步一步来的，其实可以同步进行，使用递归下降算法构造模板ast
+
+#### vue3的编译优化
+1. 构造vnode时候打补丁PatchFlags，并且除了children之外，加一个dynamicChildren用来存储所有的动态节点，每个节点有patchFlag属性会存下标志，告诉这是
+class动态节点，文本动态节点，还是style动态节点等，我们把带有该属性的节点称为块(block)，一个block不仅能够收集他的直接动态子节点，也能收集所有动态子节点
+
+2. 所有模板的根节点都会是一个block，所有里面有些openBlock() createBlock() closeBlock()等
+
+3. v-if节点也必须是个block,如果不是会造成更新错误例如
+``` js
+// <div>
+// <section v-if="foo">
+//     <p>{{e}}</p>
+// </section>
+// <section v-else">
+//     <p>{{e}}</p>
+// </section>
+// </div>
+
+// foo是true的时候的动态节点为
+const block = {
+    tag: 'div',
+    dynamciChildren: [{
+        tag: 'p',
+        children: ctx.e,
+        patchFlags: 1
+    }]
+}
+// foo是false的时候
+const block = {
+    tag: 'div',
+    dynamciChildren: [{
+        tag: 'p',
+        children: ctx.e,
+        patchFlags: 1
+    }]
+}
+// 对比时候发现无更新,所以也必须变成block，这样才行
+Block(div)
+    Block(section v-if)
+    Block(div v-else)
+```
+即使上面都是section标签也无法跟新，收集的动态虚拟节点是忽略dom层级的，而结构化指令会让模板结构不稳定，所以得把结构化指令也变成block，这样当我们diff时候比较block的key
+不同并使用新的block来替换旧的block，这样就解决了dom结构不稳定引起的更新问题
+
+4. 对于v-for我们使用新的fragment来创建
+``` js
+// <p v-for="item in list">{{item}}</p>
+const preBlock = {
+    tag: 'Fragment',
+    dynamciChildren: [{
+        tag: 'p',
+        children: item, 1
+    }, {
+        tag: 'p',
+        children: item, 2
+    }]
+}
+// 更新后
+const preBlock = {
+    tag: 'Fragment',
+    dynamciChildren: [{
+        tag: 'p',
+        children: item, 1
+    }]
+}
+```
+所谓结构不稳定，指的是更新前后一个block的dynamciChildren数组中收集的动态节点的数量或者顺序不一致，这种不一致会导致我们无法进行靶向更新，这种情况我们只能放弃使用dynamciChildren来
+进行靶向更新，使用Fragment的children来进行传统diff操作，组件中存在多个根节点的时候就会使用Fragment
+
+5. 静态提升
+``` js
+const host1 = createVNode('p', null, 'test')
+// 动态节点上有静态属性，节点不会提升，但是属性可以静态提升
+const hoistprop = { foo: 'brtydf', a: 'b' }
+createVNode('p', hoistprop, ctx.text)
+```
+
+6. 预字符串化
+大量连续纯静态字符串可以合并
+``` js
+const hoiststacivnode = createStaticVNode('<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>')
+```
+7. 缓存内连事件处理函数
+
+8. v-once包裹的动态节点不会被父级block收集
 
 
+## 服务端渲染
+其实渲染来说主要有三种也代表着技术的进步，ssr服务端渲染，csr客户端渲染，同构渲染
 
-import.meta.env.SSR
-ClientOnly onMounted钩子中处发slots.default()
+在最早期时候浏览器发起页面请求，服务端会把数据和对应html都拼接好返回给前端页面这就是服务端渲染，他对seo非常友好也没有白屏问题，但是会占用更多的服务端资源，而且每次点击都会重新刷新页面
+体验很差;随着ajax技术的出现，可以先获取静态页面之后再请求数据，点击通过路由无刷新页面，服务端资源占用少体验也好，但是会出现白屏且seo不好;
 
+结合两者优点的就是同构渲染,同构渲染的首次访问或者刷新页面与ssr的流程是一样的，都是服务端直接给html，数据也以字符串形式拼接在html里面，之后的流程就是加载vue等和csr一样，只是当资源加载完成会
+进行激活操作，也即是vue所说的hydration
+1. vue在当前页面已经渲染的dom元素和自身组件虚拟dom建立关系，包括事件绑定等
+2. vue从html页面中提取由服务端序列化后发送过来的数据，用以初始化整个vuejs应用程序
 
+客户端渲染时候的流程 `beforCreate --> 初始化data/props --> 创建组件实例 --> setup执行 --> created --> 设置render effect完成渲染`
+服务端渲染只需要获取组件要渲染的subtree即可，无需调用渲染器完成真实dom的渲染，因此在服务端渲染时候可以忽略最后一步设置render effect
+所以其beforeMount和mounted钩子不会触发，而且由于不存在变更前后的数据更新逻辑，所以beforeUpdate和updated钩子也不会在服务端执行，同样beforeUnmounted和unmounted钩子也不会执行
 
+当我们编写同构代码时候，webpack,vite等都会有类似的环境变量，例如vite我们可以编写只在客户端执行的代码
+``` js
+export default {
+    created() {
+        if (!import.meta.env.SSR) {
+            // do something in custome
+        }
+    }
+}
+```
+构建工具在客户端打包资源的时候，会在资源中排除import.meta.env.SSR包裹的代码
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+我们来介绍一个编写同构代码非常有用的组件，用它来包裹第三方可能不兼容的组件如下
+``` js
+// <ClientOnly>
+//   <compnet></compont>
+// </ClientOnly>
+export const ClientOnly = defineComponent({
+    setup(_, { slots }) {
+        const show = ref(false)
+        // 利用onMounted钩子只会在客户端渲染来解决
+        onMounted(() => {
+            show.value = true
+        })
+        return () => { (show.value && slots.default ? slots.default() : null) }
+    }
+})
+```
 
