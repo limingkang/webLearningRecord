@@ -23,7 +23,8 @@ module.exports = [
     path: '/',
     collapsable: false,
     children: [
-      ['/web-observe/web-observe', '构建前端性能监控']
+      ['/web-observe/web-observe', '构建前端性能监控'],
+      ['/web-observe/user-behavior', '用户行为录制']
     ]
   },
   {
@@ -37,11 +38,12 @@ module.exports = [
     ]
   },
   {
-    title: 'rollup',
+    title: '包管理',
     path: '/',
     collapsable: false,
     children: [
-      ['/rollup/analysize', 'basic']
+      ['/bundle/analysize', 'rollup'],
+      ['/bundle/pnpm', 'pnpm']
     ]
   },
   {

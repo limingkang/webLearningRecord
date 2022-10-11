@@ -367,6 +367,20 @@ type AA = ParamType<string>;    // string
 type Elemenof<T> = T extends Array<infer E> ? E : T;
 type Tuple = string[];
 type TupleToUnion = Elemenof<Tuple>
+
+// 如果泛型T是()=> infer R的子集，则返回infer R获取到的类型，否则返回boolean
+type Func<T> = T extends () => infer R ? R : boolean;
+let func1: Func<number>; // boolean;
+let func2: Func<''>; // boolean
+let func3: Func<() => Promise<number>>; // Promise<number>
+
+type Obj<T> = T extends { a: infer VT, b: infer VT } ? VT : number;
+let obj1: Obj<string>;  // number;
+let obj2: Obj<true>;  // number;
+let obj3: Obj<{a: string, b: string}>;   // string
+let obj4: Obj<a: number, b: string>;   // string | number
+// 当a、b为不同类型时，返回联合类型
+
 ```
 
 ## Partial、Pick
