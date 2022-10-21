@@ -1159,10 +1159,125 @@ Element.prototype.setAttribute = function setAttribute (key, value) {
 }
 ```
 
+## 优化
+我们知道沙箱的核心思路是大概这样
+``` js
+const windowProxy = new Proxy(window, traps);
 
+with(windowProxy) {
+  // 应用代码，通过 with 确保所有的全局变量的操作实际都是在操作 qiankun 提供的代理对象
+  ${appCode}  
+}
+```
+主要的性能问题是，如果我们代码频繁访问沙箱，就会出现卡顿，思路也很简单,缓存下来减少沙箱的访问次数
+``` js
+const windowProxy = new Proxy(window, traps);
+with(windowProxy) {
+// 提前将一些全局变量通过 赋值/取值 从 proxy 里缓存下来
+// 用const声明
+var undefined = windowProxy.undefined; var Array = windowProxy.Array; var Promise = windowProxy.Promise;
+  // 应用代码，通过 with 确保所有的全局变量的操作实际都是在操作 qiankun 提供的代理对象
+  ${appCode}  
+}
+```
+上面的代码没有生效，原因还是得说到var在with里面的作用，得把var改成const就可以了，简言之就是，在通过 var 初始化变量时，如果它是被套在 with 声明里的，则会先去检查当前 with 处
+理过后的词法环境里是否有重名变量，如果有的话则直接将值写给同名属性，否则按正常流程，写到当前的词法环境（对应的 variable environment）里
 
+####  ES 拾遗之 with 声明与 var 变量赋值
+umi 4 的应用作为子应用嵌入时，会触发 Maximum call stack size exceeded异常，初步排查的原因是 esbuild 导致的，解决方案是通过配置 jsMinifier: 'terser'替换掉默认
+的 esbuild minifier 即可。但这个是解决方案，不是问题原因，换言之我们只是用了一个 workaround 绕过了问题。terser可以控制压缩的变量，不是所有变量都会变成简单字符
+``` js
+const win = {a:456};
+console.log(win);
+(function(){
+  with (win) {
+    var a = 123;
+    var b = 456;
+    console.log(win);
+  }
+})();
+console.log(win);
+// 输出结果
+// {a:456}
+// {a:123}
+// {a:123}
+```
+with 是在一个 IIFE（用于独立的作用域）里触发的，变量 a （通过 var 声明）写到了 with 对应的变量空间 win 对象上,如果变量 a 的声明可以写到 win 对象上，为啥变量 b 没有写上去？
 
+因为对象 win 上已经存在属性 a，但是并不存在属性 b。从结果推测原因的话，可能得出一个初步结论：
+`在 with 代码块里，对于 scope 里已有的属性声明+赋值，是会直接写到 scope 变量上的。而对于 scope 变量不存在的属性 + 赋值，则不会写到 scope 变量上`
 
+![An image](./images/13.png)
+
+从表象上看，是因为 umi 4 的产物中有顶层作用域的 helpers：
+![An image](./images/14.png)
+上述产物在经 esbuild 压缩后，全局作用域的 helpers 变量有可能出现碰撞，比如父应用和子应用的 __hasOwnProp 都被压缩成 aB；那么子应用的代码在加载时，内部的 with statement + 
+variable declaration 会先从 window.proxy 上找 aB，失败后就会穿透沙箱尝试在顶层 window 去找，最终找到父应用的 aB 进行改写、读取。
+``` js
+/*
+ * Stage 1: 父应用初始化
+ */
+// window.aB 被赋值
+var aB = Object.prototype.hasOwnProperty;
+
+/*
+ * Stage 2: 子应用初始化
+ */
+with (window.proxy) {
+  var aB = Object.prototype.hasOwnProperty;
+}
+
+// 由于 with 的行为，上述代码等同于↓
+var aB = window.proxy.aB = Object.prototype.hasOwnProperty;
+
+/*
+ * Stage 3: 沙箱穿透
+ */
+// 在 proxy 上找不到 aB 的时候，自动穿透到顶层 window，上述代码进一步变化↓
+var aB = window.aB = Object.prototype.hasOwnProperty;
+
+// 由于沙箱穿透后需要确保返回的对象能正常调用，所以需要 bind 顶层 window，上述代码最终成为↓
+var aB = (window.aB = Object.prototype.hasOwnProperty).bind(window);
+
+/*
+ * Stage 4: 子应用消费
+ */
+// helpers 消费 aB 将永远获得错误的结果，因为 call 不再有效
+aB.call(object, prop);
+```
+而运行时爆栈是因为 helpers 的执行始终不符预期，导致原本正常的框架逻辑进入死循环，至此问题逐渐清晰
+
+#### terser
+webpack production模式下编译的文件，文件及变量名被修改、空格换行被去除，即使自己没有进行配置，webpack 也会在我们设置 production的模式时默认添加一些属性，比如这里js代码压缩用到的
+就是 TerserPlugin; TerserPlugin处理代码依赖的是 terser这个工具， terser 是可以直接安装并独立使用的，使用的时候有非常多的配置可以自行定义，具体可参考
+
+通过 npm install terser-webpack-plugin --save-dev安装依赖后，在 webpack.config.js文件中定义对应的配置，更多配置可参考
+``` js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          ecma: undefined,
+          parse: {},
+          compress: {},
+          mangle: true,
+          module: false,
+          output: null,
+          format: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_classnames: undefined,
+          keep_fnames: false,
+          safari10: false,
+        },
+      }),
+    ],
+  },
+};
+```
 
 
 

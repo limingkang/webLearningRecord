@@ -205,7 +205,51 @@ function work () {
  console.log('执行任务');
 }
 ```
-
+那么对我们的调度器进行调整，首先将 setTimeout 换成更好的 MessageChannel。那么为什么要使用 MessageChannel，而不是 requestAnimationFrame 呢？raf 的调
+用时机是在渲染之前，但这个时机不稳定，导致 raf 调用也不稳定，所以不适合。其实 MessageChannel 也是 React 调度使用的方案，如果浏览器不支持，才会降级到 setTimeout
+``` js
+const schduler = (tasks) => {
+    const DEFAULT_RUNTIME = 16;
+    const { port1, port2 } = new MessageChannel();
+    
+    let sum = 0;
+    let isAbort = false;
+    
+    const promise = new Promise((resolve, reject) => {
+        // 运行器
+        const runner = () => {
+            const prevTime = performance.now();
+            do {
+                if (isAbort) {
+                    return reject();
+                }
+                // 如果任务队列已经空了
+                if (tasks.length === 0) {
+                    return resolve(sum);
+                }
+                const task = tasks.shift();
+                const value = task();
+                sum += value;
+            } while (performance.now() - prevTime < DEFAULT_RUNTIME);
+            // 当前分片执行完成后开启下一个分片
+            port2.postMessage('');
+        };
+        
+        port1.onmessage = function () {
+            runner();
+        };
+        
+        port2.postMessage('');
+    });
+    
+    promise.abort = () => {
+        isAbort = true;
+    };
+    
+    return promise;
+};
+```
+但从火焰图上可以看到当前每个 Task 都保持在 16ms 左右的耗时，FPS 基本稳定在60左右
 ### react的应用
 在react15包括之前的时候，从根节点往下调和的过程中，是采用递归的方式进行的，这种方式是不可中断的，由于是同步进行的，而 js 线程和 GUI 线程是互斥的，因此当
 项目越来越大的时候，就会造成用户能够明显觉察到这个过程会比较卡顿，操作的时候（例如用户输入时）没有效果。其实就是 js 同步任务过长，导致浏览器掉帧了；而 react
