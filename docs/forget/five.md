@@ -123,7 +123,7 @@ services:
   Studio:
     # 依赖镜像
     image: nginx
-    # image: harbor.test.com/bfop/base_tengine:fb186ee7-20200103-0349
+    # image: harbor.test.com/test/base_tengine:fb186ee7-20200103-0349
     container_name: ${DEPLOY_CONTAINER}
     # 当前HTTP_PORT映射到80
     ports:
