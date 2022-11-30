@@ -263,9 +263,14 @@ GPU_ID:${gpu_id}
 
 `sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"`
 
+记下淘宝镜像地址：`npm install --registry=https://registry.npm.taobao.org`
 
+### node管理工具nvm
+推荐两个命令:
 
+`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
 
+`wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
 
 
 

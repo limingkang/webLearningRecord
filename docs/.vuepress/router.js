@@ -93,7 +93,8 @@ module.exports = [
       ['/think/mess', '杂谈'],
       ['/think/css', 'css方法论'],
       ['/think/svelte', 'svelte'],
-      ['/think/frame', '框架']
+      ['/think/frame', '框架'],
+      ['/think/outer', '基础文章']
     ]
   },
 ]
