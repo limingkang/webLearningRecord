@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>为什么要使用微前端架构 | 前端学习</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    
+    <meta name="description" content="努力学习">
+    <link rel="preload" href="/webLearningRecord/assets/css/0.styles.32aa171d.css" as="style"><link rel="preload" href="/webLearningRecord/assets/js/app.bdc4d5ac.js" as="script"><link rel="preload" href="/webLearningRecord/assets/js/2.1a231426.js" as="script"><link rel="preload" href="/webLearningRecord/assets/js/17.025ef091.js" as="script"><link rel="prefetch" href="/webLearningRecord/assets/js/10.6c45162c.js"><link rel="prefetch" href="/webLearningRecord/assets/js/11.f477fe3a.js"><link rel="prefetch" href="/webLearningRecord/assets/js/12.719839a4.js"><link rel="prefetch" href="/webLearningRecord/assets/js/13.2e776131.js"><link rel="prefetch" href="/webLearningRecord/assets/js/14.6961d267.js"><link rel="prefetch" href="/webLearningRecord/assets/js/15.94790cc9.js"><link rel="prefetch" href="/webLearningRecord/assets/js/16.5c5eee38.js"><link rel="prefetch" href="/webLearningRecord/assets/js/18.ef4a8780.js"><link rel="prefetch" href="/webLearningRecord/assets/js/19.ec38cef5.js"><link rel="prefetch" href="/webLearningRecord/assets/js/20.f6711983.js"><link rel="prefetch" href="/webLearningRecord/assets/js/21.0cef24fe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/22.9224a013.js"><link rel="prefetch" href="/webLearningRecord/assets/js/23.ec789df6.js"><link rel="prefetch" href="/webLearningRecord/assets/js/24.3bce65fe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/25.f4d74d85.js"><link rel="prefetch" href="/webLearningRecord/assets/js/26.70ee71fc.js"><link rel="prefetch" href="/webLearningRecord/assets/js/27.39bdc05b.js"><link rel="prefetch" href="/webLearningRecord/assets/js/28.31277bb6.js"><link rel="prefetch" href="/webLearningRecord/assets/js/29.97b7aecc.js"><link rel="prefetch" href="/webLearningRecord/assets/js/3.9f1b9f7a.js"><link rel="prefetch" href="/webLearningRecord/assets/js/30.bcf3c482.js"><link rel="prefetch" href="/webLearningRecord/assets/js/31.e07b317a.js"><link rel="prefetch" href="/webLearningRecord/assets/js/32.1352871c.js"><link rel="prefetch" href="/webLearningRecord/assets/js/33.f98a7f1c.js"><link rel="prefetch" href="/webLearningRecord/assets/js/34.3797f037.js"><link rel="prefetch" href="/webLearningRecord/assets/js/4.217c5e32.js"><link rel="prefetch" href="/webLearningRecord/assets/js/5.bd81a106.js"><link rel="prefetch" href="/webLearningRecord/assets/js/6.d3f0121d.js"><link rel="prefetch" href="/webLearningRecord/assets/js/7.c3e5ebfe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/8.62631f20.js"><link rel="prefetch" href="/webLearningRecord/assets/js/9.094f8da5.js">
+    <link rel="stylesheet" href="/webLearningRecord/assets/css/0.styles.32aa171d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/webLearningRecord/" class="home-link router-link-active"><!----> <span class="site-name">前端学习</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://github.com/limingkang" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  gitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://github.com/limingkang" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  gitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>浏览器工作原理和实践</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/browser-theory/chromeConstruct.html" class="sidebar-link">chrome架构</a></li><li><a href="/webLearningRecord/browser-theory/other.html" class="sidebar-link">缓存和安全</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active open"><span>微前端架构</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/web-consttruct/singleSpa.html" class="active sidebar-link">single-spa方式实现</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/singleSpa.html#为什么要使用微前端架构" class="sidebar-link">为什么要使用微前端架构</a></li><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/singleSpa.html#主项目接入微前端系统" class="sidebar-link">主项目接入微前端系统</a></li><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/singleSpa.html#子项目接入微前端" class="sidebar-link">子项目接入微前端</a></li><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/singleSpa.html#single-spa-vue源码" class="sidebar-link">single-spa-vue源码</a></li></ul></li><li><a href="/webLearningRecord/web-consttruct/mySingleSpa.html" class="sidebar-link">自己实现一个微前端</a></li><li><a href="/webLearningRecord/web-consttruct/mircoapp.html" class="sidebar-link">microapp</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>前端性能监控</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/web-observe/web-observe.html" class="sidebar-link">构建前端性能监控</a></li><li><a href="/webLearningRecord/web-observe/user-behavior.html" class="sidebar-link">用户行为录制</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>vue2源码分析</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/vue-analyze/vue2.html" class="sidebar-link">初始化过程</a></li><li><a href="/webLearningRecord/vue-analyze/components.html" class="sidebar-link">组件化</a></li><li><a href="/webLearningRecord/vue-analyze/reactive.html" class="sidebar-link">响应式原理</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>包管理</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/bundle/analysize.html" class="sidebar-link">rollup</a></li><li><a href="/webLearningRecord/bundle/pnpm.html" class="sidebar-link">pnpm</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>vite</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/vite/prelearn.html" class="sidebar-link">基础知识</a></li><li><a href="/webLearningRecord/vite/analysize.html" class="sidebar-link">源码分析</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>react浅析</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/react/react.html" class="sidebar-link">react初探</a></li><li><a href="/webLearningRecord/react/two.html" class="sidebar-link">react架构实现</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>经常忘记</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/forget/one.html" class="sidebar-link">JavaScript</a></li><li><a href="/webLearningRecord/forget/two.html" class="sidebar-link">TypeScript</a></li><li><a href="/webLearningRecord/forget/three.html" class="sidebar-link">CSS</a></li><li><a href="/webLearningRecord/forget/four.html" class="sidebar-link">Node</a></li><li><a href="/webLearningRecord/forget/five.html" class="sidebar-link">经常使用</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>笔试题</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/algorithm/one.html" class="sidebar-link">算法</a></li><li><a href="/webLearningRecord/algorithm/two.html" class="sidebar-link">手写函数</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>随笔</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/think/mess.html" class="sidebar-link">杂谈</a></li><li><a href="/webLearningRecord/think/css.html" class="sidebar-link">css方法论</a></li><li><a href="/webLearningRecord/think/svelte.html" class="sidebar-link">svelte</a></li><li><a href="/webLearningRecord/think/frame.html" class="sidebar-link">框架</a></li><li><a href="/webLearningRecord/think/outer.html" class="sidebar-link">基础文章</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="为什么要使用微前端架构"><a href="#为什么要使用微前端架构" class="header-anchor">#</a> 为什么要使用微前端架构</h2> <p>假设我们现在有一个运营后台，随着公司发展出现了很多新的业务线，每个业务线都有自己需要的定制的运营功能，为了满足
+这些新业务线的运营需求，我们要做的就是：</p> <ul><li>将原有的运营后台加入切换业务线的功能</li> <li>将分散在其他平台的运营功能迁移过来</li> <li>为每个业务线开发定制的功能并能够根据业务线展示</li> <li>对于业务线定制的功能，会尽量交给各个业务线负责，这就要求各个业务线都要用统一的技术栈来开发,大概就下面这个流程</li></ul> <p><img src="/webLearningRecord/assets/img/1.5dee5d56.png" alt="An image"></p> <p>按照传统方案的设计就是这样，然而这样的话将会造成以下问题：</p> <ul><li>原有的运营后台需要重构，主要重构点是鉴权和业务线切换这块，当然后端的某些接口也要做一些处理</li> <li>其他平台功能的迁移成本有点高，因为用的是不同的技术栈</li> <li>运营需求越来越多，平台就会越来越庞大，会使维护成本越来越高，迭代不够灵活，多人协作造成各种冲突</li> <li>某一个模块出了bug有可能造成整个系统崩溃</li></ul> <p>为了解决上述问题，微前端的方案是指将系统的每个模块都拆分出来，独立开发、独立部署，然后将所有功能集
+成在一起，而这些功能模块完全解耦，甚至模块之间可以使用不同的技术栈来实现，老平台功能就可以平滑迁移，流程就变成
+下面这样</p> <p><img src="/webLearningRecord/assets/img/2.968c8a7e.png" alt="An image"></p> <p>接下来我们使用Vue+single-spa实现一个微前端系统，你就可以理解微前端的原理了。</p> <h2 id="主项目接入微前端系统"><a href="#主项目接入微前端系统" class="header-anchor">#</a> 主项目接入微前端系统</h2> <p>按照上述的微前端的原理和流程图，我将以single-spa+Vue+Element带领大家分别构建出主项目和子项目，进而完成一个
+真正的微前端应用。为了方便大家的理解，此次讲解先不加入切换业务线的功能，这个功能重要但是实现起来不麻烦，同学们
+构建起微前端之后可以自行加入这个逻辑。</p> <p>首先我们来看下项目的入口文件main.js，和传统的vue项目一样是完成Vue对象的初始化工作</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ElementUI <span class="token keyword">from</span> <span class="token string">'element-ui'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'element-ui/lib/theme-chalk/index.css'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> routerMap <span class="token keyword">from</span> <span class="token string">'./router/index'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> util <span class="token keyword">from</span> <span class="token string">'@/common/js/util'</span><span class="token punctuation">;</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>ElementUI<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 绑定路由</span>
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span>routerMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>to<span class="token punctuation">.</span>fullPath <span class="token operator">===</span> <span class="token string">'/login'</span> <span class="token operator">||</span> <span class="token keyword">from</span><span class="token punctuation">.</span>fullPath <span class="token operator">===</span> <span class="token string">'/login'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 判断是否登录</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>util<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 登录</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    router<span class="token punctuation">,</span>
+    <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>然后你需要在main.js中将子模块的配置引入进来，我们会在加载器注册子模块时用到，配置文件参考如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    test<span class="token operator">:</span> <span class="token punctuation">{</span>
+        id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        parent<span class="token operator">:</span> <span class="token punctuation">{</span>
+            id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+            name<span class="token operator">:</span> <span class="token string">'test管理'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        name<span class="token operator">:</span> <span class="token string">'test模块'</span><span class="token punctuation">,</span>
+        path<span class="token operator">:</span> <span class="token string">'http://xxx.com/app.js'</span><span class="token punctuation">,</span>
+        router<span class="token operator">:</span> <span class="token string">'/test'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    demo<span class="token operator">:</span> <span class="token punctuation">{</span>
+        id<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        parent<span class="token operator">:</span> <span class="token punctuation">{</span>
+            id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+            name<span class="token operator">:</span> <span class="token string">'demo管理'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        name<span class="token operator">:</span> <span class="token string">'demo模块'</span><span class="token punctuation">,</span>
+        <span class="token comment">// 这个就是我们子项目打包生成文件发布dist之后的静态入口文件</span>
+        <span class="token comment">// 在主项目需要加载此模块的时候,就这加载这个js文件，这个文件会生成相应页面</span>
+        path<span class="token operator">:</span> <span class="token string">'http://xxx.com/app.js'</span><span class="token punctuation">,</span>
+        router<span class="token operator">:</span> <span class="token string">'/demo'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>然后将其引入进来并存储，在main.js中添加</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> appList <span class="token keyword">from</span> <span class="token string">'./appList'</span>
+util<span class="token punctuation">.</span><span class="token function">setCache</span><span class="token punctuation">(</span><span class="token string">'appList'</span><span class="token punctuation">,</span> appList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>这里需要注意的是关于路由的配置，主项目中提供首页、菜单、登录、404等公共部分逻辑和相关页面，菜单我们使用Elemnet的
+NavMenu组件，另外就是加载器的逻辑和页面（Portal页面）。所以路由应该是这样的：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> Home <span class="token keyword">from</span> <span class="token string">'@/views/Home'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Portal <span class="token keyword">from</span> <span class="token string">'@/views/Portal'</span><span class="token punctuation">;</span> <span class="token comment">// 加载器</span>
+<span class="token keyword">import</span> Login <span class="token keyword">from</span> <span class="token string">'@/views/Login'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> NotFound <span class="token keyword">from</span> <span class="token string">'@/views/404'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+		routes<span class="token operator">:</span> <span class="token punctuation">[</span>
+  			<span class="token punctuation">{</span>
+            path<span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
+          	redirect<span class="token operator">:</span> <span class="token string">'/portal'</span><span class="token punctuation">,</span>
+            component<span class="token operator">:</span> Home<span class="token punctuation">,</span>
+            children<span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    name<span class="token operator">:</span> <span class="token string">'Portal'</span><span class="token punctuation">,</span>
+                    path<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/portal*</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>    
+                    component<span class="token operator">:</span> Portal<span class="token punctuation">,</span> <span class="token comment">// 加载模块</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            path<span class="token operator">:</span> <span class="token string">'/login'</span><span class="token punctuation">,</span>
+            component<span class="token operator">:</span> Login<span class="token punctuation">,</span>
+            meta<span class="token operator">:</span> <span class="token punctuation">{</span>
+                label<span class="token operator">:</span> <span class="token string">'登录'</span><span class="token punctuation">,</span>
+                hidden<span class="token operator">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            path<span class="token operator">:</span> <span class="token string">'/404'</span><span class="token punctuation">,</span>
+            component<span class="token operator">:</span> NotFound<span class="token punctuation">,</span>
+            meta<span class="token operator">:</span> <span class="token punctuation">{</span>
+                label<span class="token operator">:</span> <span class="token string">'404'</span><span class="token punctuation">,</span>
+                hidden<span class="token operator">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            path<span class="token operator">:</span> <span class="token string">'*'</span><span class="token punctuation">,</span>
+            redirect<span class="token operator">:</span> <span class="token string">'/404'</span><span class="token punctuation">,</span>
+            meta<span class="token operator">:</span> <span class="token punctuation">{</span>
+                hidden<span class="token operator">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>404和login页面大家可以自行设计。接下来的重点是重头戏 Portal 页面的实现，这个页面实际上就是各个子项目的
+入口，其主要逻辑就是加载器的实现，接下来直接上代码，我们对着代码一步步理解</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//portal页面的HTML部分只有一个id为MICRO-APP的根元素，它作为子项目的容器，我们会在子模块中进行配置</span>
+<span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;MICRO-APP&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+<span class="token comment">/* eslint-disable */</span>
+<span class="token keyword">import</span> util <span class="token keyword">from</span> <span class="token string">'@/common/js/util'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> registerApplication<span class="token punctuation">,</span> start<span class="token punctuation">,</span> getAppNames<span class="token punctuation">,</span>
+getAppStatus<span class="token punctuation">,</span> unloadApplication <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'single-spa'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token function">registry</span><span class="token punctuation">(</span><span class="token parameter">key<span class="token punctuation">,</span> app</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 去重</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getAppNames</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// registerApplication 用于注册我们的子项目，第一个参数为项目名称（唯一即可），</span>
+            <span class="token comment">// 第二个参数为项目地址，第三个参数为匹配的路由，第四参数为初始化传值。</span>
+            <span class="token function">registerApplication</span><span class="token punctuation">(</span>
+                key<span class="token punctuation">,</span>
+                <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">const</span> <span class="token function-variable function">render</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                        <span class="token comment">// 渲染</span>
+                        <span class="token keyword">return</span> window<span class="token punctuation">.</span>System<span class="token punctuation">.</span><span class="token function">import</span><span class="token punctuation">(</span>app<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                                <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                                <span class="token keyword">return</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token parameter">location</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>location<span class="token punctuation">.</span>pathname<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>app<span class="token punctuation">.</span>router<span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment">// 注册模块</span>
+        <span class="token keyword">async</span> <span class="token function">registerApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> appList <span class="token operator">=</span> util<span class="token punctuation">.</span><span class="token function">getCache</span><span class="token punctuation">(</span><span class="token string">'appList'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key <span class="token keyword">in</span> appList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>appList<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">const</span> app <span class="token operator">=</span> appList<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">registry</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> app<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//  启动项目</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">registerApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 注册模块</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>style lang<span class="token operator">=</span><span class="token string">&quot;less&quot;</span> scoped<span class="token operator">&gt;</span>
+#<span class="token constant">MICRO</span><span class="token operator">-</span><span class="token constant">APP</span> <span class="token punctuation">{</span>
+    position<span class="token operator">:</span> relative<span class="token punctuation">;</span>
+    width<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span>
+    height<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span>
+    z<span class="token operator">-</span>index<span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>style<span class="token operator">&gt;</span>
+</code></pre></div><p>在讲解registerApplication之前，我们首先对注册子模块的生命周期做一个介绍，这将帮助你可以更加深刻的理解加载器的原理和
+注册的过程。需要注意的是，我说的生命周期指的是注册子模块这个过程的生命周期，而不是这个页面的生命周期。</p> <p>注册的子模块会经过下载(loaded)、初始化(initialized)、被挂载(mounted)、卸载(unmounted)和unloaded（被移除）等
+过程。single-spa会通过“生命周期”为这些过程提供钩子函数。这些钩子函数包括：</p> <ul><li><p>bootstrap：这个生命周期函数会在子模块第一次挂载前执行一次</p></li> <li><p>mount：在注册某个子模块过程中，当 activityFunction（registerApplication的第三个参数）返回为真，且该子模块处于
+未挂载状态时，mount生命周期函数就会被调用。调用时，函数会根据URL来确定当前被激活的路由，创建DOM元素、监听DOM事件等
+以向用户呈现渲染的内容。挂载过之后，接下来任何子路由的改变（如hashchange或popstate等）不会再次触发mount，需
+要各模块自行处理</p></li> <li><p>unmount：每当应用的 activityFunction 返回假值，但该应用已挂载时，卸载的生命周期函数就会被调用。卸载函数被调用
+时，会清理在挂载应用时被创建的DOM元素、事件监听、内存、全局变量和消息订阅等</p></li></ul> <p>另外还需要注意：这些生命周期函数的调用是需要在各个子模块的入口文件中实现的，我们在讲到子模块的时候在给大家介绍如何实现
+registerApplication方法</p> <div class="language-js extra-class"><pre class="language-js"><code>singleSpa<span class="token punctuation">.</span><span class="token function">registerApplication</span><span class="token punctuation">(</span>
+  app<span class="token punctuation">.</span>key<span class="token punctuation">,</span>
+  <span class="token function">loadingFunction</span><span class="token punctuation">(</span>app<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+  <span class="token function">activityFunction</span><span class="token punctuation">(</span>app<span class="token punctuation">.</span>router<span class="token punctuation">)</span><span class="token punctuation">,</span>   
+  <span class="token punctuation">{</span> access_token<span class="token operator">:</span> <span class="token string">'asnjknfjkds'</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">loadingFunction</span><span class="token punctuation">(</span><span class="token parameter">path</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">import</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">activityFunction</span><span class="token punctuation">(</span><span class="token parameter">location<span class="token punctuation">,</span>router</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> location<span class="token punctuation">.</span>pathname<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>router<span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li><p>第一个参数是一个key值，需要唯一</p></li> <li><p>第二个参数是一个回调函数，必须是返回promise的函数(或&quot;async function&quot;方法)。这个函数没有入参，会在子模块第一次
+被下载时调用。返回的Promise resolve之后的结果必须是一个可以被解析的子模块。常见的实现方法是使用import加
+载：() =&gt; import('/path/to/application.js')，为了能够独立部署各个应用，这里的import使用的是 SystemJS</p></li> <li><p>第三个参数也是一个函数，返回bool值，window.location会作为第一个参数被调用，当函数返回的值为真(truthy)值，应
+用会被激活，通常情况下，Activity function会根据window.location/后面的path来决定该应用是否需要被激活。激活后
+如果子模块未挂载，则会执行mount生命周期。</p></li> <li><p>第四个参数属于自定义参数，，然后我们可以在各个生命周期函数中通过props**.**customProps接收到这个参数这个
+参数也许会很有用，比如以下场景：</p> <ol><li>各个应用共享一个公共的 参数，比如：access_token</li> <li>下发初始化信息，如渲染目标</li> <li>传递对事件总线（eventBus）的引用，方便各应用之间进行通信</li></ol></li></ul> <h2 id="子项目接入微前端"><a href="#子项目接入微前端" class="header-anchor">#</a> 子项目接入微前端</h2> <p>子项目原则上可以采用任何技术栈，这里我以Vue为例和大家一起实现一个子模块,完成了主项目之后，子项目的实现也就非常
+简单了，这里主要用到的一个东西就是 single-spa-vue，singleSpaVue 是 single-spa 结合 vue 的方法，我们使
+用它来实现已经注册该子模块的生命周期逻辑。它的第一个参数是 vue，第二个参数 appOptions 就是我们平时传入的vue配置</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 子项目入口文件</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ElementUI <span class="token keyword">from</span> <span class="token string">'element-ui'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'element-ui/lib/theme-chalk/index.css'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> routerMap <span class="token keyword">from</span> <span class="token string">'./router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> singleSpaVue <span class="token keyword">from</span> <span class="token string">'single-spa-vue'</span><span class="token punctuation">;</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>ElementUI<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span>routerMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> vueLifecycles <span class="token operator">=</span> <span class="token function">singleSpaVue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    Vue<span class="token punctuation">,</span>
+    appOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+        router<span class="token punctuation">,</span>
+        store<span class="token punctuation">,</span>
+        <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        el<span class="token operator">:</span><span class="token string">'#MICRO-APP'</span>     <span class="token comment">// Portal页面中的子模块容器，子模块会被插入到该元素中</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> bootstrap <span class="token operator">=</span> vueLifecycles<span class="token punctuation">.</span>bootstrap<span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> mount <span class="token operator">=</span> vueLifecycles<span class="token punctuation">.</span>mount<span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> unmount <span class="token operator">=</span> vueLifecycles<span class="token punctuation">.</span>unmount<span class="token punctuation">;</span>
+
+<span class="token comment">//如果你想在生命周期函数之后做些事情可以向下边这样做</span>
+<span class="token keyword">const</span> vueLifecycles <span class="token operator">=</span> <span class="token function">singleSpaVue</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">mount</span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token operator">=&gt;</span> vueLifecycles<span class="token punctuation">.</span><span class="token function">mount</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">instance</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// do what you want with the Vue instance</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>接下来我们来看看路由的配置，和常规配置一样，只要注意base的设置即可</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> List <span class="token keyword">from</span> <span class="token string">'../views/List.vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    mode<span class="token operator">:</span> <span class="token string">'history'</span><span class="token punctuation">,</span>
+    base<span class="token operator">:</span> <span class="token string">'/portal'</span><span class="token punctuation">,</span>
+    routes<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            path<span class="token operator">:</span> <span class="token string">'/demo'</span><span class="token punctuation">,</span>
+            redirect<span class="token operator">:</span> <span class="token string">'/demo/list'</span><span class="token punctuation">,</span>
+            component<span class="token operator">:</span> List
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            name<span class="token operator">:</span> <span class="token string">'List'</span><span class="token punctuation">,</span>
+            path<span class="token operator">:</span> <span class="token string">'/demo/list'</span><span class="token punctuation">,</span>
+            component<span class="token operator">:</span> List
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="single-spa-vue源码"><a href="#single-spa-vue源码" class="header-anchor">#</a> single-spa-vue源码</h2> <p>这个包其实就是定义下我们需要的mount等方法，可看下源码很简单</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token string">&quot;css.escape&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> defaultOpts <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// required opts</span>
+  Vue<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  appOptions<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  template<span class="token operator">:</span> <span class="token keyword">null</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">singleSpaVue</span><span class="token punctuation">(</span><span class="token parameter">userOpts</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> userOpts <span class="token operator">!==</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">single-spa-vue requires a configuration object</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">const</span> opts <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>defaultOpts<span class="token punctuation">,</span>
+    <span class="token operator">...</span>userOpts
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>opts<span class="token punctuation">.</span>Vue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token function">Error</span><span class="token punctuation">(</span><span class="token string">&quot;single-spa-vue must be passed opts.Vue&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>opts<span class="token punctuation">.</span>appOptions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token function">Error</span><span class="token punctuation">(</span><span class="token string">&quot;single-spa-vue must be passed opts.appOptions&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>
+    opts<span class="token punctuation">.</span>appOptions<span class="token punctuation">.</span>el <span class="token operator">&amp;&amp;</span>
+    <span class="token keyword">typeof</span> opts<span class="token punctuation">.</span>appOptions<span class="token punctuation">.</span>el <span class="token operator">!==</span> <span class="token string">&quot;string&quot;</span> <span class="token operator">&amp;&amp;</span>
+    <span class="token operator">!</span><span class="token punctuation">(</span>opts<span class="token punctuation">.</span>appOptions<span class="token punctuation">.</span>el <span class="token keyword">instanceof</span> <span class="token class-name">HTMLElement</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token function">Error</span><span class="token punctuation">(</span>
+      <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">single-spa-vue: appOptions.el must be a string CSS selector, an 
+      HTMLElement, or not provided at all. Was given </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">typeof</span> opts
+        <span class="token punctuation">.</span>appOptions<span class="token punctuation">.</span>el<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">let</span> mountedInstances <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    bootstrap<span class="token operator">:</span> <span class="token function">bootstrap</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> opts<span class="token punctuation">,</span> mountedInstances<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    mount<span class="token operator">:</span> <span class="token function">mount</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> opts<span class="token punctuation">,</span> mountedInstances<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    unmount<span class="token operator">:</span> <span class="token function">unmount</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> opts<span class="token punctuation">,</span> mountedInstances<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    update<span class="token operator">:</span> <span class="token function">update</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> opts<span class="token punctuation">,</span> mountedInstances<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">bootstrap</span><span class="token punctuation">(</span><span class="token parameter">opts</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>opts<span class="token punctuation">.</span>loadRootComponent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> opts<span class="token punctuation">.</span><span class="token function">loadRootComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">root</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>opts<span class="token punctuation">.</span>rootComponent <span class="token operator">=</span> root<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">mount</span><span class="token punctuation">(</span><span class="token parameter">opts<span class="token punctuation">,</span> mountedInstances<span class="token punctuation">,</span> props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> instance <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> appOptions <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span>opts<span class="token punctuation">.</span>appOptions <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>props<span class="token punctuation">.</span>domElement <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>appOptions<span class="token punctuation">.</span>el<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      appOptions<span class="token punctuation">.</span>el <span class="token operator">=</span> props<span class="token punctuation">.</span>domElement<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">let</span> domEl<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>appOptions<span class="token punctuation">.</span>el<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> appOptions<span class="token punctuation">.</span>el <span class="token operator">===</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        domEl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span>appOptions<span class="token punctuation">.</span>el<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>domEl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">throw</span> <span class="token function">Error</span><span class="token punctuation">(</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">If appOptions.el is provided to single-spa-vue, the dom 
+            element must exist in the dom. Was provided as </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>appOptions<span class="token punctuation">.</span>el<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+          <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        domEl <span class="token operator">=</span> appOptions<span class="token punctuation">.</span>el<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>domEl<span class="token punctuation">.</span>id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          domEl<span class="token punctuation">.</span>id <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">single-spa-application:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>props<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        appOptions<span class="token punctuation">.</span>el <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">#</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">CSS</span><span class="token punctuation">.</span><span class="token function">escape</span><span class="token punctuation">(</span>domEl<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> htmlId <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">single-spa-application:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>props<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+      appOptions<span class="token punctuation">.</span>el <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">#</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">CSS</span><span class="token punctuation">.</span><span class="token function">escape</span><span class="token punctuation">(</span>htmlId<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+      domEl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span>htmlId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>domEl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        domEl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;div&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        domEl<span class="token punctuation">.</span>id <span class="token operator">=</span> htmlId<span class="token punctuation">;</span>
+        document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>domEl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    appOptions<span class="token punctuation">.</span>el <span class="token operator">=</span> appOptions<span class="token punctuation">.</span>el <span class="token operator">+</span> <span class="token string">&quot; .single-spa-container&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// single-spa-vue@&gt;=2 always REPLACES the `el` instead of appending to it.</span>
+    <span class="token comment">// We want domEl to stick around and not be replaced. So we tell Vue to mount</span>
+    <span class="token comment">// into a container div inside of the main domEl</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>domEl<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;.single-spa-container&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> singleSpaContainer <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;div&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      singleSpaContainer<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token string">&quot;single-spa-container&quot;</span><span class="token punctuation">;</span>
+      domEl<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>singleSpaContainer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    instance<span class="token punctuation">.</span>domEl <span class="token operator">=</span> domEl<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>appOptions<span class="token punctuation">.</span>render <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>appOptions<span class="token punctuation">.</span>template <span class="token operator">&amp;&amp;</span> opts<span class="token punctuation">.</span>rootComponent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      appOptions<span class="token punctuation">.</span><span class="token function-variable function">render</span> <span class="token operator">=</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>opts<span class="token punctuation">.</span>rootComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>appOptions<span class="token punctuation">.</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      appOptions<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    appOptions<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span>appOptions<span class="token punctuation">.</span>data<span class="token punctuation">,</span> <span class="token operator">...</span>props <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    instance<span class="token punctuation">.</span>vueInstance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">opts<span class="token punctuation">.</span>Vue</span><span class="token punctuation">(</span>appOptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>instance<span class="token punctuation">.</span>vueInstance<span class="token punctuation">.</span>bind<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      instance<span class="token punctuation">.</span>vueInstance <span class="token operator">=</span> instance<span class="token punctuation">.</span><span class="token function">vueInstance</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>instance<span class="token punctuation">.</span>vueInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    mountedInstances<span class="token punctuation">[</span>props<span class="token punctuation">.</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> instance<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> instance<span class="token punctuation">.</span>vueInstance<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">update</span><span class="token punctuation">(</span><span class="token parameter">opts<span class="token punctuation">,</span> mountedInstances<span class="token punctuation">,</span> props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> instance <span class="token operator">=</span> mountedInstances<span class="token punctuation">[</span>props<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token operator">...</span><span class="token punctuation">(</span>opts<span class="token punctuation">.</span>appOptions<span class="token punctuation">.</span>data <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token operator">...</span>props
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> prop <span class="token keyword">in</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      instance<span class="token punctuation">.</span>vueInstance<span class="token punctuation">[</span>prop<span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span>prop<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">unmount</span><span class="token punctuation">(</span><span class="token parameter">opts<span class="token punctuation">,</span> mountedInstances<span class="token punctuation">,</span> props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> instance <span class="token operator">=</span> mountedInstances<span class="token punctuation">[</span>props<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    instance<span class="token punctuation">.</span>vueInstance<span class="token punctuation">.</span><span class="token function">$destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    instance<span class="token punctuation">.</span>vueInstance<span class="token punctuation">.</span>$el<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> instance<span class="token punctuation">.</span>vueInstance<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>instance<span class="token punctuation">.</span>domEl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      instance<span class="token punctuation">.</span>domEl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+      <span class="token keyword">delete</span> instance<span class="token punctuation">.</span>domEl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><a href="https://github.com/hui-fly/micro-fe" target="_blank" rel="noopener noreferrer">参考项目<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/webLearningRecord/browser-theory/other.html" class="prev">
+        缓存和安全
+      </a></span> <span class="next"><a href="/webLearningRecord/web-consttruct/mySingleSpa.html">
+        自己实现一个微前端
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/webLearningRecord/assets/js/app.bdc4d5ac.js" defer></script><script src="/webLearningRecord/assets/js/2.1a231426.js" defer></script><script src="/webLearningRecord/assets/js/17.025ef091.js" defer></script>
+  </body>
+</html>

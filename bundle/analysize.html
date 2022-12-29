@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>rollup输出格式 | 前端学习</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    
+    <meta name="description" content="努力学习">
+    <link rel="preload" href="/webLearningRecord/assets/css/0.styles.32aa171d.css" as="style"><link rel="preload" href="/webLearningRecord/assets/js/app.bdc4d5ac.js" as="script"><link rel="preload" href="/webLearningRecord/assets/js/2.1a231426.js" as="script"><link rel="preload" href="/webLearningRecord/assets/js/11.f477fe3a.js" as="script"><link rel="prefetch" href="/webLearningRecord/assets/js/10.6c45162c.js"><link rel="prefetch" href="/webLearningRecord/assets/js/12.719839a4.js"><link rel="prefetch" href="/webLearningRecord/assets/js/13.2e776131.js"><link rel="prefetch" href="/webLearningRecord/assets/js/14.6961d267.js"><link rel="prefetch" href="/webLearningRecord/assets/js/15.94790cc9.js"><link rel="prefetch" href="/webLearningRecord/assets/js/16.5c5eee38.js"><link rel="prefetch" href="/webLearningRecord/assets/js/17.025ef091.js"><link rel="prefetch" href="/webLearningRecord/assets/js/18.ef4a8780.js"><link rel="prefetch" href="/webLearningRecord/assets/js/19.ec38cef5.js"><link rel="prefetch" href="/webLearningRecord/assets/js/20.f6711983.js"><link rel="prefetch" href="/webLearningRecord/assets/js/21.0cef24fe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/22.9224a013.js"><link rel="prefetch" href="/webLearningRecord/assets/js/23.ec789df6.js"><link rel="prefetch" href="/webLearningRecord/assets/js/24.3bce65fe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/25.f4d74d85.js"><link rel="prefetch" href="/webLearningRecord/assets/js/26.70ee71fc.js"><link rel="prefetch" href="/webLearningRecord/assets/js/27.39bdc05b.js"><link rel="prefetch" href="/webLearningRecord/assets/js/28.31277bb6.js"><link rel="prefetch" href="/webLearningRecord/assets/js/29.97b7aecc.js"><link rel="prefetch" href="/webLearningRecord/assets/js/3.9f1b9f7a.js"><link rel="prefetch" href="/webLearningRecord/assets/js/30.bcf3c482.js"><link rel="prefetch" href="/webLearningRecord/assets/js/31.e07b317a.js"><link rel="prefetch" href="/webLearningRecord/assets/js/32.1352871c.js"><link rel="prefetch" href="/webLearningRecord/assets/js/33.f98a7f1c.js"><link rel="prefetch" href="/webLearningRecord/assets/js/34.3797f037.js"><link rel="prefetch" href="/webLearningRecord/assets/js/4.217c5e32.js"><link rel="prefetch" href="/webLearningRecord/assets/js/5.bd81a106.js"><link rel="prefetch" href="/webLearningRecord/assets/js/6.d3f0121d.js"><link rel="prefetch" href="/webLearningRecord/assets/js/7.c3e5ebfe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/8.62631f20.js"><link rel="prefetch" href="/webLearningRecord/assets/js/9.094f8da5.js">
+    <link rel="stylesheet" href="/webLearningRecord/assets/css/0.styles.32aa171d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/webLearningRecord/" class="home-link router-link-active"><!----> <span class="site-name">前端学习</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://github.com/limingkang" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  gitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://github.com/limingkang" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  gitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>浏览器工作原理和实践</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/browser-theory/chromeConstruct.html" class="sidebar-link">chrome架构</a></li><li><a href="/webLearningRecord/browser-theory/other.html" class="sidebar-link">缓存和安全</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>微前端架构</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/web-consttruct/singleSpa.html" class="sidebar-link">single-spa方式实现</a></li><li><a href="/webLearningRecord/web-consttruct/mySingleSpa.html" class="sidebar-link">自己实现一个微前端</a></li><li><a href="/webLearningRecord/web-consttruct/mircoapp.html" class="sidebar-link">microapp</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>前端性能监控</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/web-observe/web-observe.html" class="sidebar-link">构建前端性能监控</a></li><li><a href="/webLearningRecord/web-observe/user-behavior.html" class="sidebar-link">用户行为录制</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>vue2源码分析</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/vue-analyze/vue2.html" class="sidebar-link">初始化过程</a></li><li><a href="/webLearningRecord/vue-analyze/components.html" class="sidebar-link">组件化</a></li><li><a href="/webLearningRecord/vue-analyze/reactive.html" class="sidebar-link">响应式原理</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active open"><span>包管理</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/bundle/analysize.html" class="active sidebar-link">rollup</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/webLearningRecord/bundle/analysize.html#rollup输出格式" class="sidebar-link">rollup输出格式</a></li></ul></li><li><a href="/webLearningRecord/bundle/pnpm.html" class="sidebar-link">pnpm</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>vite</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/vite/prelearn.html" class="sidebar-link">基础知识</a></li><li><a href="/webLearningRecord/vite/analysize.html" class="sidebar-link">源码分析</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>react浅析</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/react/react.html" class="sidebar-link">react初探</a></li><li><a href="/webLearningRecord/react/two.html" class="sidebar-link">react架构实现</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>经常忘记</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/forget/one.html" class="sidebar-link">JavaScript</a></li><li><a href="/webLearningRecord/forget/two.html" class="sidebar-link">TypeScript</a></li><li><a href="/webLearningRecord/forget/three.html" class="sidebar-link">CSS</a></li><li><a href="/webLearningRecord/forget/four.html" class="sidebar-link">Node</a></li><li><a href="/webLearningRecord/forget/five.html" class="sidebar-link">经常使用</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>笔试题</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/algorithm/one.html" class="sidebar-link">算法</a></li><li><a href="/webLearningRecord/algorithm/two.html" class="sidebar-link">手写函数</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>随笔</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/think/mess.html" class="sidebar-link">杂谈</a></li><li><a href="/webLearningRecord/think/css.html" class="sidebar-link">css方法论</a></li><li><a href="/webLearningRecord/think/svelte.html" class="sidebar-link">svelte</a></li><li><a href="/webLearningRecord/think/frame.html" class="sidebar-link">框架</a></li><li><a href="/webLearningRecord/think/outer.html" class="sidebar-link">基础文章</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="rollup输出格式"><a href="#rollup输出格式" class="header-anchor">#</a> rollup输出格式</h2> <p>我们首先构建一个简单的demo如下</p> <div class="language-js extra-class"><pre class="language-js"><code>├── answer<span class="token punctuation">.</span>js
+├── index<span class="token punctuation">.</span>js
+├── out
+├── <span class="token keyword">package</span><span class="token punctuation">.</span>json
+├── rollup<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
+└── yarn<span class="token punctuation">.</span>lock
+</code></pre></div><p>其中 index.js 和 answer.js 属于业务代码，是需要被打包的对象。在 index.js 中依赖了 answer.js。如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// answer.js</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token number">42</span>
+
+<span class="token comment">// index.js</span>
+<span class="token keyword">import</span> answer <span class="token keyword">from</span> <span class="token string">&quot;./answer&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> repeat <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'lodash'</span>
+<span class="token comment">// 定义一个无用变量, 测试 tree-shaking</span>
+<span class="token keyword">const</span> unusedVar <span class="token operator">=</span> <span class="token string">'May the 4th'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">printAnswer</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 打印</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">the answer is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>answer<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+  <span class="token comment">// 测试 lodash 的能力，打印42个1</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> answer<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>rollup.config.js 是 rollup 的配置文件，在此文件中我们分别指定其输出<code>amd , cjs , esm , iife , umd , system</code>六种格式的文件</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// rollup.config.js</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 核心选项</span>
+  input<span class="token operator">:</span> <span class="token string">'index.js'</span><span class="token punctuation">,</span>     <span class="token comment">// 必须</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  output<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      file<span class="token operator">:</span> <span class="token string">'out/amd/bundle.js'</span><span class="token punctuation">,</span>
+      format<span class="token operator">:</span> <span class="token string">'amd'</span><span class="token punctuation">,</span>
+      amd<span class="token operator">:</span> <span class="token punctuation">{</span>
+        id<span class="token operator">:</span> <span class="token string">'Test'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      file<span class="token operator">:</span> <span class="token string">'out/cjs/bundle.js'</span><span class="token punctuation">,</span>
+      format<span class="token operator">:</span> <span class="token string">'cjs'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      file<span class="token operator">:</span> <span class="token string">'out/esm/bundle.js'</span><span class="token punctuation">,</span>
+      format<span class="token operator">:</span> <span class="token string">'esm'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      file<span class="token operator">:</span> <span class="token string">'out/iife/bundle.js'</span><span class="token punctuation">,</span>
+      format<span class="token operator">:</span> <span class="token string">'iife'</span><span class="token punctuation">,</span>
+      name<span class="token operator">:</span> <span class="token string">'Test'</span><span class="token punctuation">,</span>
+      globals<span class="token operator">:</span> <span class="token punctuation">{</span>
+        lodash<span class="token operator">:</span> <span class="token string">'lodash'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      file<span class="token operator">:</span> <span class="token string">'out/umd/bundle.js'</span><span class="token punctuation">,</span>
+      format<span class="token operator">:</span> <span class="token string">'umd'</span><span class="token punctuation">,</span>
+      name<span class="token operator">:</span> <span class="token string">'Test'</span><span class="token punctuation">,</span>
+      globals<span class="token operator">:</span> <span class="token punctuation">{</span>
+        lodash<span class="token operator">:</span> <span class="token string">'lodash'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      amd<span class="token operator">:</span> <span class="token punctuation">{</span>
+        id<span class="token operator">:</span> <span class="token string">'Test'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      file<span class="token operator">:</span> <span class="token string">'out/system/bundle.js'</span><span class="token punctuation">,</span>
+      format<span class="token operator">:</span> <span class="token string">'system'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  external<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'lodash'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>输出的文件会被打包到 out 文件夹下,当我们执行 yarn build 或者 npm build 之后，会在 out 下产生如下格式的代码：</p> <div class="language-js extra-class"><pre class="language-js"><code>├── out
+│   ├── amd
+│   │   └── bundle<span class="token punctuation">.</span>js
+│   ├── cjs
+│   │   └── bundle<span class="token punctuation">.</span>js
+│   ├── ems
+│   │   └── bundle<span class="token punctuation">.</span>js
+│   ├── iife
+│   │   └── bundle<span class="token punctuation">.</span>js
+│   ├── system
+│   │   └── bundle<span class="token punctuation">.</span><span class="token function">js</span> <span class="token punctuation">(</span>SystemJS 加载器的原生格式 （别名：systemjs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+│   └── umd
+│       └── bundle<span class="token punctuation">.</span>js
+</code></pre></div><p>为了弄清楚每种格式的 bundle.js 文件是如何运作的，我专门为它们订制添加了一些附属的小 demo</p> <h3 id="iife-自执行函数"><a href="#iife-自执行函数" class="header-anchor">#</a> IIFE 自执行函数</h3> <p>让我们先看看本 demo 的 iife 格式打出来的包长什么样。
+<img src="/webLearningRecord/assets/img/one.4649deb4.png" alt="An image">
+对上述代码做一些简化：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> Test <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">exports<span class="token punctuation">,</span> lodash</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token string">'use strict'</span><span class="token punctuation">;</span> <span class="token comment">// 自带严格模式，避免一些奇怪的兼容性问题</span>
+
+  <span class="token comment">/**
+   * 下面折行无用代码被 tree-shaking 掉了
+   * const unusedVar = 'May the 4th'
+   * */</span>
+
+  <span class="token keyword">var</span> answer <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// 业务中被单一引用的模块，被直接抹平了</span>
+
+  <span class="token keyword">const</span> <span class="token function-variable function">printAnswer</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">the answer is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>answer<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>lodash<span class="token punctuation">.</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> answer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  exports<span class="token punctuation">.</span>printAnswer <span class="token operator">=</span> printAnswer<span class="token punctuation">;</span> <span class="token comment">// 把要export的属性挂在到exports上</span>
+
+  <span class="token keyword">return</span> exports<span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> $<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// exports是第一个入参，依赖的jquery是第二个入参</span>
+</code></pre></div><p>IIFE 是前端模块化早期的产物，它的核心思路是:</p> <ol><li>构建一个匿名函数</li> <li>立刻执行这个匿名函数，对外部的依赖通过入参的形式传入</li> <li>返回该模块的输出</li></ol> <p>IIFE 的运行其实很容易，如果它没有其他依赖，只需要去引入文件，然后在 window 上取相应的变量即可。如：</p> <div class="language-html extra-class"><pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://cdn.bootcss.com/jquery/3.3.1/jquery.min.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript"> 
+    <span class="token comment">// jquery 就是典型的自执行函数模式，当你引入后，他就会挂在到 window.$ 上</span>
+    window<span class="token punctuation">.</span>$ <span class="token comment">// 这样就能取到 jquery 了</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>但是如果你像本 demo 中那样依赖了其他的模块，那你就必须保证以下两点才能正常运行：</p> <ul><li>此包所依赖的包，已在此包之前完成加载。</li> <li>前置依赖的包，和 IIFE 只执行入参的变量命名是一致的。</li></ul> <p>以本 demo 的 IIFE 构建结果为例：它前置依赖了 lodash，因此需要在它加载之前完成 lodash 的加载。此 IIFE 的第二个入参是 lodash，作为
+前置条件，我们需要让 window.lodash 也指向 lodash。因此，运行时，代码如下</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">window<span class="token punctuation">.</span>lodash <span class="token operator">=</span> window<span class="token punctuation">.</span>_</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>  
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>./bundle.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    window<span class="token punctuation">.</span>Test<span class="token punctuation">.</span><span class="token function">printAnswer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>优点:</p> <ol><li>通过闭包营造了一个“私有”命名空间，防止影响全局，并防止被从外部修改私有变量。</li> <li>简单易懂</li> <li>对代码体积的影响不大</li></ol> <p>缺点：</p> <ol><li>输出的变量可能影响全局变量；引入依赖包时依赖全局变量。</li> <li>需要使用者自行维护 script 标签的加载顺序。</li></ol> <h3 id="commonjs"><a href="#commonjs" class="header-anchor">#</a> CommonJS</h3> <p>先看看 CommonJs 打包的结果:
+<img src="/webLearningRecord/assets/img/two.bc3cf1df.png" alt="An image">
+简化一下，就长这样了：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> lodash <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'lodash'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> answer <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">printAnswer</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 打印</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">the answer is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>answer<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 测试 lodash 的能力，打印42个1</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>lodash<span class="token punctuation">.</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> answer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+exports<span class="token punctuation">.</span>printAnswer <span class="token operator">=</span> printAnswer<span class="token punctuation">;</span>
+</code></pre></div><p>以上格式，就是 CommonJS 规范的写法。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// CommonJS 通过一个全局 require 方法进行模块的引入 </span>
+<span class="token keyword">var</span> lodash <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'lodash'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// CommonJS 进行模块内方法输出的方式</span>
+module<span class="token punctuation">.</span>exports<span class="token punctuation">.</span>printAnswer <span class="token operator">=</span> printAnswer<span class="token punctuation">;</span>
+<span class="token comment">// 上面写法也等价于：</span>
+exports<span class="token punctuation">.</span>printAnswer <span class="token operator">=</span> printAnswer<span class="token punctuation">;</span>
+<span class="token comment">// 因为 exports 变量等价于 module.exports</span>
+</code></pre></div><p>为了解决 node.js 在模块化上的缺失， 2009年10月 CommonJS 规范首次被提出。CommonJS 并不是在浏览器环境运行的规范，而是
+在 node.js 环境下运行的。</p> <p>优点</p> <ul><li>完善的模块化方案，完美解决了 IIFE 的各种缺点。
+缺点</li> <li>不支持浏览器环境，因为这种同步的引入方式可能导致浏览器假死。</li></ul> <p>因此，前端界迫切地需要一种能在浏览器环境完美运行，完善的模块化方案。</p> <h3 id="amd-和-requirejs"><a href="#amd-和-requirejs" class="header-anchor">#</a> AMD 和 requirejs</h3> <p>amd 格式的打包结果如下：
+<img src="/webLearningRecord/assets/img/three.93de6f05.png" alt="An image">
+可以看到，核心内容是一个全局方法 define 。define 方法有三个入参，分别是：</p> <ol><li>&quot;Test&quot;, 模块名称</li> <li>[exports, lodash] 分别表示模块的输出和外部依赖</li> <li>一个以 exports 和 lodash 作为入参的方法，代表模块的实际内容。</li></ol> <p>相比于 IIFE 和 CommonJs 而言，AMD 的写法无疑是复杂且别扭的。但它却实实在在是解决了 IIFE 和 CommonJS 所面临的问题，对“浏览
+器里完善的JS模块方法” 提供了一套完善的方案。尤其是 amd 标准的实现方案：requirejs。requirejs 所实现的 AMD 不仅解决了 CommonJS 在
+浏览器端的不适，通过异步的方式进行模块加载实现了不会导致假死的能力；更是完全弥补了 IIFE 存在的各类缺陷。requirejs 在使用时，一般情况下
+是以下四步法：</p> <ol><li>在浏览器内引入 require.js</li> <li>通过 requirejs.config 方法定义全局的依赖</li> <li>通过 requirejs.define 注册模块</li> <li>通过 requirejs() 完成模块引入。</li></ol> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- 1. 引入 require.js --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>./require.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- 2. 定义全局依赖 --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    window<span class="token punctuation">.</span>requirejs<span class="token punctuation">.</span><span class="token function">config</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      paths<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;lodash&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- 3. 定义模块 --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>./bundle.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token comment">// 4. 开销模块</span>
+    window<span class="token punctuation">.</span><span class="token function">requirejs</span><span class="token punctuation">(</span>
+      <span class="token punctuation">[</span><span class="token string">'Test'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token keyword">function</span>   <span class="token punctuation">(</span><span class="token parameter">test</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        test<span class="token punctuation">.</span><span class="token function">printAnswer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>优点</p> <ol><li>解决了 CommonJS 的缺点</li> <li>解决了 IIFE 的缺点</li> <li>一套完备的浏览器里 js 文件模块化方案</li></ol> <p>缺点</p> <ul><li>代码组织形式别扭，可读性差，但好在我们拥有了各类打包工具，浏览器内的代码可读性再差也并不影响我们写出可读性ok的代码。</li></ul> <h3 id="umd伟大的整合"><a href="#umd伟大的整合" class="header-anchor">#</a> UMD伟大的整合</h3> <p>umd 格式构建出来的代码的可读性进一步降低了。我相信任何正常人看到下面这段代码都会感到一阵头大：
+<img src="/webLearningRecord/assets/img/four.6f85c463.png" alt="An image">
+是的，整整一大段代码，只是在处理兼容性问题，判断当前应该使用 amd 亦或是 CommonJS。因此 umd 的代码和实现不在此进行过多分析，它所做的
+无非便是让同一段代码兼容了 amd 和 CommonJS。</p> <ul><li>在浏览器端，它的运行方式和 amd 完全一致，可以完全参考 3.2 节的 demo</li> <li>在node.js端，它则和 CommonJS 的运行方式完全一致，在此就不赘述了</li> <li>优点是抹平了一个包在 AMD 和 CommonJS 里的差异</li> <li>缺点是会为了兼容产生大量不好理解的代码。（理解难度与包体积）</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/webLearningRecord/vue-analyze/reactive.html" class="prev">
+        响应式原理
+      </a></span> <span class="next"><a href="/webLearningRecord/bundle/pnpm.html">
+        pnpm
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/webLearningRecord/assets/js/app.bdc4d5ac.js" defer></script><script src="/webLearningRecord/assets/js/2.1a231426.js" defer></script><script src="/webLearningRecord/assets/js/11.f477fe3a.js" defer></script>
+  </body>
+</html>

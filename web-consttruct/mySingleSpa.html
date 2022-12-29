@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PortalSDK | 前端学习</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    
+    <meta name="description" content="努力学习">
+    <link rel="preload" href="/webLearningRecord/assets/css/0.styles.32aa171d.css" as="style"><link rel="preload" href="/webLearningRecord/assets/js/app.bdc4d5ac.js" as="script"><link rel="preload" href="/webLearningRecord/assets/js/2.1a231426.js" as="script"><link rel="preload" href="/webLearningRecord/assets/js/32.1352871c.js" as="script"><link rel="prefetch" href="/webLearningRecord/assets/js/10.6c45162c.js"><link rel="prefetch" href="/webLearningRecord/assets/js/11.f477fe3a.js"><link rel="prefetch" href="/webLearningRecord/assets/js/12.719839a4.js"><link rel="prefetch" href="/webLearningRecord/assets/js/13.2e776131.js"><link rel="prefetch" href="/webLearningRecord/assets/js/14.6961d267.js"><link rel="prefetch" href="/webLearningRecord/assets/js/15.94790cc9.js"><link rel="prefetch" href="/webLearningRecord/assets/js/16.5c5eee38.js"><link rel="prefetch" href="/webLearningRecord/assets/js/17.025ef091.js"><link rel="prefetch" href="/webLearningRecord/assets/js/18.ef4a8780.js"><link rel="prefetch" href="/webLearningRecord/assets/js/19.ec38cef5.js"><link rel="prefetch" href="/webLearningRecord/assets/js/20.f6711983.js"><link rel="prefetch" href="/webLearningRecord/assets/js/21.0cef24fe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/22.9224a013.js"><link rel="prefetch" href="/webLearningRecord/assets/js/23.ec789df6.js"><link rel="prefetch" href="/webLearningRecord/assets/js/24.3bce65fe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/25.f4d74d85.js"><link rel="prefetch" href="/webLearningRecord/assets/js/26.70ee71fc.js"><link rel="prefetch" href="/webLearningRecord/assets/js/27.39bdc05b.js"><link rel="prefetch" href="/webLearningRecord/assets/js/28.31277bb6.js"><link rel="prefetch" href="/webLearningRecord/assets/js/29.97b7aecc.js"><link rel="prefetch" href="/webLearningRecord/assets/js/3.9f1b9f7a.js"><link rel="prefetch" href="/webLearningRecord/assets/js/30.bcf3c482.js"><link rel="prefetch" href="/webLearningRecord/assets/js/31.e07b317a.js"><link rel="prefetch" href="/webLearningRecord/assets/js/33.f98a7f1c.js"><link rel="prefetch" href="/webLearningRecord/assets/js/34.3797f037.js"><link rel="prefetch" href="/webLearningRecord/assets/js/4.217c5e32.js"><link rel="prefetch" href="/webLearningRecord/assets/js/5.bd81a106.js"><link rel="prefetch" href="/webLearningRecord/assets/js/6.d3f0121d.js"><link rel="prefetch" href="/webLearningRecord/assets/js/7.c3e5ebfe.js"><link rel="prefetch" href="/webLearningRecord/assets/js/8.62631f20.js"><link rel="prefetch" href="/webLearningRecord/assets/js/9.094f8da5.js">
+    <link rel="stylesheet" href="/webLearningRecord/assets/css/0.styles.32aa171d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/webLearningRecord/" class="home-link router-link-active"><!----> <span class="site-name">前端学习</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://github.com/limingkang" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  gitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://github.com/limingkang" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  gitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>浏览器工作原理和实践</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/browser-theory/chromeConstruct.html" class="sidebar-link">chrome架构</a></li><li><a href="/webLearningRecord/browser-theory/other.html" class="sidebar-link">缓存和安全</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active open"><span>微前端架构</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/web-consttruct/singleSpa.html" class="sidebar-link">single-spa方式实现</a></li><li><a href="/webLearningRecord/web-consttruct/mySingleSpa.html" class="active sidebar-link">自己实现一个微前端</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/mySingleSpa.html#portalsdk" class="sidebar-link">PortalSDK</a></li><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/mySingleSpa.html#主项目改造" class="sidebar-link">主项目改造</a></li><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/mySingleSpa.html#加载子项目配置文件" class="sidebar-link">加载子项目配置文件</a></li><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/mySingleSpa.html#载入路由和映射" class="sidebar-link">载入路由和映射</a></li><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/mySingleSpa.html#子项目appconfig配置" class="sidebar-link">子项目appConfig配置</a></li><li class="sidebar-sub-header"><a href="/webLearningRecord/web-consttruct/mySingleSpa.html#子项目主文件配置" class="sidebar-link">子项目主文件配置</a></li></ul></li><li><a href="/webLearningRecord/web-consttruct/mircoapp.html" class="sidebar-link">microapp</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>前端性能监控</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/web-observe/web-observe.html" class="sidebar-link">构建前端性能监控</a></li><li><a href="/webLearningRecord/web-observe/user-behavior.html" class="sidebar-link">用户行为录制</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>vue2源码分析</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/vue-analyze/vue2.html" class="sidebar-link">初始化过程</a></li><li><a href="/webLearningRecord/vue-analyze/components.html" class="sidebar-link">组件化</a></li><li><a href="/webLearningRecord/vue-analyze/reactive.html" class="sidebar-link">响应式原理</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>包管理</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/bundle/analysize.html" class="sidebar-link">rollup</a></li><li><a href="/webLearningRecord/bundle/pnpm.html" class="sidebar-link">pnpm</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>vite</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/vite/prelearn.html" class="sidebar-link">基础知识</a></li><li><a href="/webLearningRecord/vite/analysize.html" class="sidebar-link">源码分析</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>react浅析</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/react/react.html" class="sidebar-link">react初探</a></li><li><a href="/webLearningRecord/react/two.html" class="sidebar-link">react架构实现</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>经常忘记</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/forget/one.html" class="sidebar-link">JavaScript</a></li><li><a href="/webLearningRecord/forget/two.html" class="sidebar-link">TypeScript</a></li><li><a href="/webLearningRecord/forget/three.html" class="sidebar-link">CSS</a></li><li><a href="/webLearningRecord/forget/four.html" class="sidebar-link">Node</a></li><li><a href="/webLearningRecord/forget/five.html" class="sidebar-link">经常使用</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>笔试题</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/algorithm/one.html" class="sidebar-link">算法</a></li><li><a href="/webLearningRecord/algorithm/two.html" class="sidebar-link">手写函数</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/webLearningRecord/" class="sidebar-heading clickable router-link-active"><span>随笔</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/webLearningRecord/think/mess.html" class="sidebar-link">杂谈</a></li><li><a href="/webLearningRecord/think/css.html" class="sidebar-link">css方法论</a></li><li><a href="/webLearningRecord/think/svelte.html" class="sidebar-link">svelte</a></li><li><a href="/webLearningRecord/think/frame.html" class="sidebar-link">框架</a></li><li><a href="/webLearningRecord/think/outer.html" class="sidebar-link">基础文章</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="portalsdk"><a href="#portalsdk" class="header-anchor">#</a> PortalSDK</h2> <p>由于我自己项目本身原因，方便快速接入，只是做了简单处理，各种全局数据直接挂载window对象上，首先我们需要先写一个
+可以注册保存模块到全局变量等方法的sdk，最后打包成npm包供所有项目使用</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 是否为主入口模块</span>
+  <span class="token keyword">get</span> <span class="token function">isPortal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> window<span class="token punctuation">.</span>admin_global_env <span class="token operator">===</span> <span class="token string">'portal'</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 注册app</span>
+  <span class="token function">register</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>
+    appName<span class="token punctuation">,</span>
+    $bootstrap<span class="token punctuation">,</span>
+    $destroy<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    window<span class="token punctuation">.</span>admin_global_registers <span class="token operator">=</span> window<span class="token punctuation">.</span>admin_global_registers <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    window<span class="token punctuation">.</span>admin_global_registers<span class="token punctuation">[</span>appName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+      $bootstrap<span class="token punctuation">,</span>
+      $destroy<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 获取用户信息</span>
+  <span class="token keyword">get</span> <span class="token function">userInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> window<span class="token punctuation">.</span>admin_global_userInfo <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 获取用户权限</span>
+  <span class="token keyword">get</span> <span class="token function">authorities</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> window<span class="token punctuation">.</span>admin_global_authorities <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 校验权限</span>
+  <span class="token function">checkAction</span><span class="token punctuation">(</span><span class="token parameter">actionId</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>authorities<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>actionId<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 全局eventBus</span>
+  <span class="token comment">// 当不存在时暂时使用一个mock的eventBus</span>
+  <span class="token keyword">get</span> <span class="token function">eventBus</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> window<span class="token punctuation">.</span>admin_global_eventBus <span class="token operator">||</span> <span class="token punctuation">{</span>
+      <span class="token function">$emit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">$on</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">$once</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token function">initEventBus</span><span class="token punctuation">(</span><span class="token parameter">eventBus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>admin_global_eventBus<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// eslint-disable-next-line</span>
+      console<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">'[PORTAL-SDK] 当前已经存在全局eventBus'</span><span class="token punctuation">,</span> window<span class="token punctuation">.</span>admin_global_eventBus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 可以在主入口模块中初始化事件监控系统, 方便子项目和入口主项目之间通信，例如通知菜单改变什么的</span>
+    window<span class="token punctuation">.</span>admin_global_eventBus <span class="token operator">=</span> eventBus<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="主项目改造"><a href="#主项目改造" class="header-anchor">#</a> 主项目改造</h2> <p>此项目使用vuex、vue-router、vue、page.js开发，main.js中直接上代码</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 声明这是主项目</span>
+window<span class="token punctuation">.</span>admin_global_env <span class="token operator">=</span> <span class="token string">'portal'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 直接使用vue的事件监控方法, 并调用上面的sdk保存到全局，供子项目间相互通信</span>
+<span class="token comment">// 可以去发布订阅一些事件window.admin_global_eventBus.$emit('envChanged', env);</span>
+<span class="token comment">// window.admin_global_eventBus.$on('envChanged', (data)=&gt;{);</span>
+<span class="token keyword">import</span> portalSdk <span class="token keyword">from</span> <span class="token string">'portal-sdk'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> eventBus <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+portalSdk<span class="token punctuation">.</span><span class="token function">initEventBus</span><span class="token punctuation">(</span>eventBus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function-variable function">initEventBus</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  window<span class="token punctuation">.</span>admin_global_eventBus <span class="token operator">=</span> eventBus<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">initEventBus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 使用vuex，方便子项目模块使用</span>
+<span class="token comment">// const globalStore = new Vuex.Store({</span>
+<span class="token comment">//   state: initialState,</span>
+<span class="token comment">//   getters,</span>
+<span class="token comment">//   mutations,</span>
+<span class="token comment">//   actions,</span>
+<span class="token comment">//   modules,</span>
+<span class="token comment">// });</span>
+<span class="token keyword">const</span> <span class="token function-variable function">initVuex</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  window<span class="token punctuation">.</span>admin_global_store <span class="token operator">=</span> globalStore<span class="token punctuation">;</span> <span class="token comment">// 主项目全局store</span>
+
+  <span class="token keyword">const</span> moduleNames <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> <span class="token function-variable function">registerModule</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">store<span class="token punctuation">,</span> moduleConfig</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> module <span class="token punctuation">}</span> <span class="token operator">=</span> moduleConfig<span class="token punctuation">;</span>
+    moduleNames<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    store<span class="token punctuation">.</span><span class="token function">registerModule</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> module<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  window<span class="token punctuation">.</span><span class="token function-variable function">admin_global_registerModule</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">store<span class="token punctuation">,</span> moduleConfig</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>moduleConfig<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>moduleConfig<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> moduleConfig<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      moduleConfig<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">p</span> <span class="token operator">=&gt;</span> <span class="token function">registerModule</span><span class="token punctuation">(</span>store<span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token function">registerModule</span><span class="token punctuation">(</span>store<span class="token punctuation">,</span> moduleConfig<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  window<span class="token punctuation">.</span><span class="token function-variable function">admin_global_unregisterModule</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">store<span class="token punctuation">,</span> moduleNamespace</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> reg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">^</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>moduleNamespace<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>moduleNames<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">p</span> <span class="token operator">=&gt;</span> reg<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">p</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      store<span class="token punctuation">.</span><span class="token function">unregisterModule</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">delete</span> moduleNames<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">initVuex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 最后做一些初始化init方法，后面详细分析每个方法</span>
+<span class="token keyword">const</span> apps <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">loadConfigs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> globalVue <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  el<span class="token operator">:</span> <span class="token string">'#navbar'</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>navbar<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  store<span class="token operator">:</span> globalStore<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">setRouter</span><span class="token punctuation">(</span>apps<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="加载子项目配置文件"><a href="#加载子项目配置文件" class="header-anchor">#</a> 加载子项目配置文件</h2> <p>上文中的<code>loadConfigs</code>方法就是加载子项目配置的方法，我们的子项目中最终的打包编译后的代码中必须有个appConfig.json
+配置文件(后面介绍)，代码如下</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// appConfig是所有子项目对应环境的地址例如</span>
+<span class="token comment">// const appConfig = {};</span>
+<span class="token comment">// if (process.env.NODE_ENV === 'pro') {</span>
+<span class="token comment">//   Object.assign(appConfig, {</span>
+<span class="token comment">//     项目1: 'https://xxx1.com',</span>
+<span class="token comment">//     项目2: 'https://xxx2.com',</span>
+<span class="token comment">//   });</span>
+<span class="token comment">// }</span>
+<span class="token keyword">const</span> <span class="token function-variable function">loadConfigs</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>Object
+    <span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span>appConfig<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> item <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">loader</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">appConfig.json?</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>item<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> <span class="token punctuation">{</span>
+        menus<span class="token punctuation">,</span> appName<span class="token punctuation">,</span> dependencies<span class="token punctuation">,</span> boostrapElement
+      <span class="token punctuation">}</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
+
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        menus<span class="token punctuation">,</span> <span class="token comment">// 配置中有菜单</span>
+        appName<span class="token punctuation">,</span>
+        dependencies<span class="token punctuation">,</span> <span class="token comment">// 依赖的静态资源</span>
+        boostrapElement<span class="token punctuation">,</span>
+        appRoot<span class="token operator">:</span> url<span class="token punctuation">,</span> <span class="token comment">// 提前加载的静态资源的base</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  list <span class="token operator">=</span> res<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">p</span> <span class="token operator">=&gt;</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 针对符合权限的菜单排序,做些权限菜单过滤等</span>
+  <span class="token comment">// 同时我们在这里需要先遍历把所有的路径中的路由对应的app和其配置保存到全局</span>
+  <span class="token comment">// window.admin_global_urlAppMap = {</span>
+  <span class="token comment">//   &quot;/#/core/test1/&quot;: 对应每个appConfig的值</span>
+  <span class="token comment">// };</span>
+  <span class="token keyword">return</span> list<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="载入路由和映射"><a href="#载入路由和映射" class="header-anchor">#</a> 载入路由和映射</h2> <p>上面我们已经加载了各个子项目的配置文件，接下来我们要<code>setRouter</code>方法，这里我们使用page.js来做路由
+其中page.js, 是基于快速路由器的微客户端端路由器，具体不做介绍，可以<a href="https://github.com/visionmedia/page.js" target="_blank" rel="noopener noreferrer">查看文档<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 寻找相应配置中的钩子</span>
+<span class="token keyword">const</span> <span class="token function-variable function">execAppMethods</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">appName<span class="token punctuation">,</span> method<span class="token punctuation">,</span> <span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> register <span class="token operator">=</span> window<span class="token punctuation">.</span>admin_global_registers <span class="token operator">&amp;&amp;</span>
+    window<span class="token punctuation">.</span>admin_global_registers<span class="token punctuation">[</span>appName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>register <span class="token operator">&amp;&amp;</span> register<span class="token punctuation">[</span>method<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    register<span class="token punctuation">[</span>method<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> portalApp <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#my-portal'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> appContainerList <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> portalContainer <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.my-portal'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// apps就是上面loadConfig的返回值</span>
+apps<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> appContainer <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  appContainer<span class="token punctuation">.</span>style<span class="token punctuation">.</span>display <span class="token operator">=</span> <span class="token string">'block'</span><span class="token punctuation">;</span>
+  appContainer<span class="token punctuation">.</span>style<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token string">'100%'</span><span class="token punctuation">;</span>
+  appContainer<span class="token punctuation">.</span>style<span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token string">'100%'</span><span class="token punctuation">;</span>
+  appContainer<span class="token punctuation">.</span>$$instance <span class="token operator">=</span> app<span class="token punctuation">;</span>
+  appContainerList<span class="token punctuation">[</span>app<span class="token punctuation">.</span>appName<span class="token punctuation">]</span> <span class="token operator">=</span> appContainer<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">page</span><span class="token punctuation">(</span><span class="token string">'/notfound'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  portalContainer<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@/view/404.html'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">page</span><span class="token punctuation">(</span><span class="token string">'*'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">ctx</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> realHash <span class="token operator">=</span> ctx<span class="token punctuation">.</span>hash<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'?'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> app <span class="token operator">=</span> appsStore<span class="token punctuation">.</span><span class="token function">getAppByUrl</span><span class="token punctuation">(</span>realHash<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>app<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> appContainer <span class="token operator">=</span> appContainerList<span class="token punctuation">[</span>app<span class="token punctuation">.</span>appName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 是否未切换应用</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>currentAppContainer <span class="token operator">===</span> appContainer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 销毁当前存在在页面上的应用</span>
+    <span class="token comment">// const destroyCurrentApp = () =&gt; {</span>
+    <span class="token comment">//   if (window.currentAppContainer) {</span>
+    <span class="token comment">//     const { appName } = window.currentAppContainer.$$instance;</span>
+    <span class="token comment">//     const { firstChild } = window.currentAppContainer;</span>
+    <span class="token comment">//     execAppMethods(appName, '$destroy', firstChild);</span>
+    <span class="token comment">//     removeChildren(window.currentAppContainer);</span>
+    <span class="token comment">//     window.currentAppContainer = null;</span>
+    <span class="token comment">//   }</span>
+    <span class="token comment">// };</span>
+    <span class="token function">destroyCurrentApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    window<span class="token punctuation">.</span>currentAppContainer <span class="token operator">=</span> appContainer<span class="token punctuation">;</span>
+
+    <span class="token comment">// 更改当前app中chunk的publicPath</span>
+    window<span class="token punctuation">.</span>resourceBaseUrl <span class="token operator">=</span> app<span class="token punctuation">.</span>appRoot<span class="token punctuation">;</span>
+
+    <span class="token comment">// 展示当前appContainer，隐藏其他appContainer</span>
+    <span class="token function">toggleChildren</span><span class="token punctuation">(</span>portalApp<span class="token punctuation">,</span> appContainer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 准备好用于初始化应用代码的容器</span>
+    <span class="token comment">// 创建app容器</span>
+    <span class="token comment">// const createAppComponent = (appContainer, app) =&gt; {</span>
+    <span class="token comment">//   const appComponent = document.createElement('app');</span>
+    <span class="token comment">//   appComponent.id = app.boostrapElement;</span>
+    <span class="token comment">//   appContainer.appendChild(appComponent);</span>
+    <span class="token comment">// };</span>
+    <span class="token function">createAppComponent</span><span class="token punctuation">(</span>appContainer<span class="token punctuation">,</span> app<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>portalApp<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>appContainer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      portalApp<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>appContainer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 加载app所需的css和js</span>
+    appsStore<span class="token punctuation">.</span>isLoadingApp <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> dependencies<span class="token operator">:</span> deps <span class="token punctuation">}</span> <span class="token operator">=</span> app<span class="token punctuation">;</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+        <span class="token comment">// 加载配置中的静态资源</span>
+        <span class="token operator">...</span><span class="token function">loadStaticList</span><span class="token punctuation">(</span>deps<span class="token punctuation">.</span>css<span class="token punctuation">,</span> app<span class="token punctuation">.</span>appRoot<span class="token punctuation">,</span> <span class="token string">'link'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span><span class="token function">loadStaticList</span><span class="token punctuation">(</span>deps<span class="token punctuation">.</span>js<span class="token punctuation">,</span> app<span class="token punctuation">.</span>appRoot<span class="token punctuation">,</span> <span class="token string">'script'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+        <span class="token operator">...</span><span class="token function">loadStaticList</span><span class="token punctuation">(</span>deps<span class="token punctuation">.</span>noCacheJs<span class="token punctuation">,</span> app<span class="token punctuation">.</span>appRoot<span class="token punctuation">,</span> <span class="token string">'script'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        window<span class="token punctuation">.</span>admin_global_eventBus<span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'envChanged'</span><span class="token punctuation">,</span> <span class="token function">getEnv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 延缓到下一次宏任务执行</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 初始化app,触发对应项目的钩子</span>
+          <span class="token function">execAppMethods</span><span class="token punctuation">(</span>app<span class="token punctuation">.</span>appName<span class="token punctuation">,</span> <span class="token string">'$boostrap'</span><span class="token punctuation">,</span> appContainer<span class="token punctuation">.</span>firstChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          appsStore<span class="token punctuation">.</span>isLoadingApp <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">page</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="子项目appconfig配置"><a href="#子项目appconfig配置" class="header-anchor">#</a> 子项目appConfig配置</h2> <p>首先每个接入的项目必须声明一个appConfig.json文件（建议由webpack自动生成），放置于根目录。其配置如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+  <span class="token comment">// app版本号</span>
+  <span class="token string">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.1.0&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment">// 必需，App项目名，需要和package.json的name一致</span>
+  <span class="token string">&quot;appName&quot;</span> <span class="token operator">:</span> <span class="token string">&quot;webA&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment">// 必需，app本身的依赖，相对路径</span>
+  <span class="token string">&quot;dependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 每次渲染app都需要重新加载的js，默认&quot;main.&quot;开头的js会重新加载</span>
+    <span class="token string">&quot;noCacheJs&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">// 只在app挂载时加载的js</span>
+    <span class="token string">&quot;js&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">// 只在app挂载时加载的css</span>
+    <span class="token string">&quot;css&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// 必需，菜单</span>
+  <span class="token string">&quot;menus&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token string">&quot;displayName&quot;</span><span class="token operator">:</span> <span class="token string">&quot;test&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;iconClass&quot;</span><span class="token operator">:</span> <span class="token string">&quot;weba-lock&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/#/core/test/&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;actionId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;wea.1&quot;</span>  <span class="token comment">// 权限ID</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token comment">// 应用所有的路由配置树</span>
+  <span class="token comment">// 非必须</span>
+  <span class="token comment">// menus的优先级高于router，router可以作为补充路由，例如一些不存在于menus中的页面</span>
+  <span class="token string">&quot;router&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token string">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/#/core/test1&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们也可以自定义webpack plugin、使用plugin，来自动生成,需要注意的是为了确保路由不会冲突，每个项目的路由
+必须有一个统一个一级路由作为命名空间（例如webA为/weba/page1, webB为/webB/page1）</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> pkg <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'../package.json'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">TEMPLATE</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  boostrapElement<span class="token operator">:</span> <span class="token string">'weba'</span><span class="token punctuation">,</span>
+  version<span class="token operator">:</span> pkg<span class="token punctuation">.</span>version<span class="token punctuation">,</span>
+  appName<span class="token operator">:</span> pkg<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+  dependencies<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  menus<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    displayName<span class="token operator">:</span> <span class="token string">'消息通道'</span><span class="token punctuation">,</span>
+    iconClass<span class="token operator">:</span> <span class="token string">'weba-text'</span><span class="token punctuation">,</span>
+    menus<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">getPkgTemplate</span><span class="token punctuation">(</span><span class="token parameter">assets</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> _tmp <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token constant">TEMPLATE</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  _tmp<span class="token punctuation">.</span>dependencies <span class="token operator">=</span> <span class="token punctuation">{</span>
+    js<span class="token operator">:</span> assets<span class="token punctuation">.</span>js<span class="token punctuation">,</span>
+    css<span class="token operator">:</span> assets<span class="token punctuation">.</span>css<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>_tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">addFileToAssets</span><span class="token punctuation">(</span>
+    <span class="token parameter">compilation<span class="token punctuation">,</span>
+    htmlPluginData<span class="token punctuation">,</span></span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> filepath <span class="token operator">=</span> <span class="token string">'../appConfig.json'</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      fs<span class="token punctuation">.</span><span class="token function">writeFileSync</span><span class="token punctuation">(</span>filepath<span class="token punctuation">,</span> <span class="token function">getPkgTemplate</span><span class="token punctuation">(</span>htmlPluginData<span class="token punctuation">.</span>assets<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        flag<span class="token operator">:</span> <span class="token string">'w'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">const</span> addedFilename <span class="token operator">=</span> <span class="token keyword">await</span> htmlPluginData<span class="token punctuation">.</span>plugin<span class="token punctuation">.</span><span class="token function">addFileToAssets</span><span class="token punctuation">(</span>
+        filepath<span class="token punctuation">,</span>
+        compilation<span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      compilation<span class="token punctuation">.</span>assets<span class="token punctuation">[</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>filepath<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">]</span> <span class="token operator">=</span>
+        compilation<span class="token punctuation">.</span>assets<span class="token punctuation">[</span>addedFilename<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      fs<span class="token punctuation">.</span><span class="token function">unlinkSync</span><span class="token punctuation">(</span>filepath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// console.error('=========&gt;exception', JSON.stringify(e));</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">bundleReaderPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+bundleReaderPlugin<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">apply</span> <span class="token operator">=</span> <span class="token parameter">compiler</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>compilation<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">'bundleReaderPlugin'</span><span class="token punctuation">,</span> <span class="token parameter">compilation</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        compilation<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>htmlWebpackPluginBeforeHtmlGeneration<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">'bundleReaderPlugin'</span><span class="token punctuation">,</span>
+          <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">htmlPluginData<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">await</span> <span class="token function">addFileToAssets</span><span class="token punctuation">(</span>compilation<span class="token punctuation">,</span> htmlPluginData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> htmlPluginData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> bundleReaderPlugin<span class="token punctuation">;</span>
+
+<span class="token comment">// 使用的时候只需要加入webpack的plugin即可</span>
+<span class="token keyword">const</span> plugins <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token keyword">new</span> <span class="token class-name">BundleReaderPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="子项目主文件配置"><a href="#子项目主文件配置" class="header-anchor">#</a> 子项目主文件配置</h2> <p>子项目main.js文件接入</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 支持运行时修改public_path</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>resourceBaseUrl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// eslint-disable-next-line no-undef</span>
+  __webpack_public_path__ <span class="token operator">=</span> window<span class="token punctuation">.</span>resourceBaseUrl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">import</span> portal <span class="token keyword">from</span> <span class="token string">'portal-sdk'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> pkg <span class="token keyword">from</span> <span class="token string">'../package.json'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">init</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">dom</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>portal<span class="token punctuation">.</span>isPortal<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 如果不是接入的子项目可以做些权限认证等....</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">const</span> vueConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+    el<span class="token operator">:</span> dom<span class="token punctuation">,</span>
+    router<span class="token punctuation">,</span>
+    <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token comment">// const store = [{</span>
+  <span class="token comment">//   name: `${NAMESPACE}`,</span>
+  <span class="token comment">//   module: {</span>
+  <span class="token comment">//     namespaced: true,</span>
+  <span class="token comment">//     state,</span>
+  <span class="token comment">//     getters,</span>
+  <span class="token comment">//     mutations,</span>
+  <span class="token comment">//     actions,</span>
+  <span class="token comment">//   }</span>
+  <span class="token comment">// },</span>
+  <span class="token comment">// {</span>
+  <span class="token comment">//   name: `${NAMESPACE}test`,</span>
+  <span class="token comment">//   module: test</span>
+  <span class="token comment">// }];</span>
+  <span class="token comment">// 可以在全局主项目vuex再次注册相应模块</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>admin_global_store <span class="token operator">&amp;&amp;</span> window<span class="token punctuation">.</span>admin_global_registerModule<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    window<span class="token punctuation">.</span><span class="token function">admin_global_registerModule</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>admin_global_store<span class="token punctuation">,</span> store<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vueConfig<span class="token punctuation">.</span>store <span class="token operator">=</span> window<span class="token punctuation">.</span>admin_global_store<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span>vueConfig<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// 也可以通过eventBus和其他项目交流，如果想用自己的eventBus，可以重新new vue()一个eventBus</span>
+portal<span class="token punctuation">.</span>eventBus<span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'envChanged'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">env</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// empty</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> vmPromise<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>portal<span class="token punctuation">.</span>isPortal<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 注册app</span>
+  portal<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    appName<span class="token operator">:</span> pkg<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+    <span class="token function-variable function">$bootstrap</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">dom</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      vmPromise <span class="token operator">=</span> <span class="token function">init</span><span class="token punctuation">(</span>dom<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">$destroy</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> vm <span class="token operator">=</span> <span class="token keyword">await</span> vmPromise<span class="token punctuation">;</span>
+      vm<span class="token punctuation">.</span><span class="token function">$destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 正常初始化，用于本地测试</span>
+  <span class="token function">init</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>注意一点要配置下webpack异步加载时候的方法webpackJsonp的名字，因为都是挂载全局对象上多个项目会冲突
+webpackJsonp变量名可以通过output.jsonpFunction进行配置</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> pkg <span class="token keyword">from</span> <span class="token string">'./package.json'</span><span class="token punctuation">;</span>
+output<span class="token operator">:</span> <span class="token punctuation">{</span>
+  jsonpFunction<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>pkg<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">_jsonp</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre></div><h3 id="以上的接入是在微前端还不火的时候自己写的，现在已经很很多成型的微前端框架，例如qiankun是一个基于single-spa的微前端实现库"><a href="#以上的接入是在微前端还不火的时候自己写的，现在已经很很多成型的微前端框架，例如qiankun是一个基于single-spa的微前端实现库" class="header-anchor">#</a> 以上的接入是在微前端还不火的时候自己写的，现在已经很很多成型的微前端框架，例如qiankun是一个基于single-spa的微前端实现库</h3> <p><a href="https://juejin.im/post/5ea55417e51d4546e347fda9" target="_blank" rel="noopener noreferrer">qiankun接入<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://mp.weixin.qq.com/s/o7L_Sxl1s0uKywRy-Ao5fg" target="_blank" rel="noopener noreferrer">qiankun源码解析<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/webLearningRecord/web-consttruct/singleSpa.html" class="prev">
+        single-spa方式实现
+      </a></span> <span class="next"><a href="/webLearningRecord/web-consttruct/mircoapp.html">
+        microapp
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/webLearningRecord/assets/js/app.bdc4d5ac.js" defer></script><script src="/webLearningRecord/assets/js/2.1a231426.js" defer></script><script src="/webLearningRecord/assets/js/32.1352871c.js" defer></script>
+  </body>
+</html>
