@@ -19,6 +19,7 @@ function throtte(fn, time=300) {
   let can = true;
   return function(...args) {
     if (!can) return;
+    can = false;
     setTimeout(() => {
       can = true;
       fn.apply(this, args);
