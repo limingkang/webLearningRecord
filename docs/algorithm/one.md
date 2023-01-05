@@ -537,7 +537,79 @@ console.log(getName2(data))
 // a,a2,b,c,d,b2,c2,d2,e,f,g,e2,f2,g2 
 ```
 
+## 机器人走方格
+有一个m*n的网格，一个机器人只能走格点且只能向右或向下走，要从左上角走到右下角。
+请设计一个算法，计算机器人有多少种走法。
+给定两个正整数int m,int n，请返回机器人的走法数目。保证x＋y小于等于15
+``` js
+function solve(m, n) {
+  if(m === 1 || n === 1) return 1;
+  return solve(m - 1, n) + solve(m, n - 1)
+}
+```
 
+##  跳跃游戏
+给定一个长度为 n 的 0 索引整数数组 nums。初始位置为 nums[0];每个元素 nums[i] 表示从索引 i 向前跳转的最大长度。换句话说，如果你在 nums[i] 处，你可以跳转到任意 nums[i + j] 处:
+- 0 <= j <= nums[i] 
+- i + j < n
+
+返回到达 nums[n - 1] 的最小跳跃次数。生成的测试用例可以到达 nums[n - 1]。
+
+1. 输入: nums = [2,3,1,1,4]
+2. 输出: 2
+3. 解释: 跳到最后一个位置的最小跳跃数是 2。从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。
+
+``` js
+// 如果动态规划超时，可以尝试贪心算法，每一次直接走最优解
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var jump = function (nums) {
+  // 贪心
+  const n = nums.length;
+  let jumps = 0;
+  let farthest = 0;
+  let end = 0;
+  for (let i = 0; i < n - 1; i++) {
+    // 从 i 开始跳，跳最远可以到 farthest
+    farthest = Math.max(farthest, i + nums[i]);
+    if (end === i) {
+      // 如果上一跳到达的终点是此次要跳的起点，就跳
+      jumps++;
+      end = farthest; // 此次跳跃 可到达的区间 是 [i,end]
+    }
+  }
+
+  return jumps;
+};
+```
+
+## 全排列
+给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案
+``` js
+var permute = function(nums) {
+    const result = []
+    backTrack(nums, result, [])
+    return result
+};
+
+function backTrack (nums, result, track) {
+    if (track.length === nums.length) {
+        // 更改引用类型的指针。目的；防止回溯行为影响到当前数组状态。
+        result.push([...track])
+        return
+    }
+    for (let i = 0; i < nums.length; i++) {
+        if (track.includes(nums[i])) {
+            continue
+        }
+        track.push(nums[i])
+        backTrack(nums, result, track)
+        track.pop()
+    }
+}
+```
 [leetcode](https://leetcode-cn.com/problemset/all/);
 
 
